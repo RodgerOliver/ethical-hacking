@@ -2,7 +2,6 @@
 Here are the commands that will be used in the course
 ## Network
 ### Change MAC Address
-interface = wlan0
 * Get the interface down
   * `ifconfig wlan0 down`
 * Use macchanger
@@ -12,9 +11,9 @@ interface = wlan0
 ### Change Wireless Card Mode
 #### Method 1
 * Start Monitor Mode
-  * `airmon-ng start <interface>`
+  * `airmon-ng start wlan0`
 * Stop Monitor Mode
-  * `airmon-ng stop <interface>`
+  * `airmon-ng stop wlan0mon`
 #### Method 2
 * Get the interface down
   * `ifconfig wlan0 down`
@@ -28,4 +27,11 @@ interface = wlan0
 * Kill Process
   * `airmon-ng check kill`
 * Start Monitor Mode
-  * `airmon-ng start <interface>`
+  * `airmon-ng start wlan0`
+### Packet Sniffing
+* Start Sniffing
+  * `airodump-ng wlan0mon`
+* Sniff In A Specific Network
+  * `airodump-ng --channel <network channel> --bssid <network bssid> --write <file-name> wlan0mon`
+* Deauth Attacks
+  * `aireplay-ng --deauth <mun-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
