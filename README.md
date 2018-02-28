@@ -56,5 +56,5 @@ Here are the commands that will be used in the course
 * Deauth a client to capture the WPA Hanshake
 * Crack the Key
   * `aircrack-ng <handshake-file> -w <word-list>`
-##### Create a Wordlist
+#### Create a Wordlist
 `crunch <min-length> <max-length> <characters> -o <file-name> -t <pattern>`
