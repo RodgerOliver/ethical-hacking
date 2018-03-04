@@ -28,6 +28,8 @@ Here are the commands that will be used in the course
   * `airmon-ng check kill`
 * Start Monitor Mode
   * `airmon-ng start wlan0`
+* Restart Network Manager
+  * `service NetworkManager restart`
 ### Packet Sniffing
 * Start Sniffing
   * `airodump-ng wlan0mon`
