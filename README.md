@@ -69,11 +69,11 @@ After authenticating to a network you gather information about it.
 * Using Autoscan
   * download [Autoscan](http://autoscan-network.com/download)
   * add 32bit compatibility `dpkg --add-architecture i386`
-  * `apt-get update`
+  * update `apt-get update`
   * download and install library `apt-get install libc6:i386`
   * install Autoscan in the terminal running `./<downaloaded file>`
   * run Autoscan
 * Using Nmap
-  * `zenmap`
+  * run `zenmap`
   * in Target put `<network internal IP>.1/24`
   * play arround with Profile
