@@ -60,3 +60,20 @@ Here are the commands that will be used in the course
   * `aircrack-ng <handshake-file> -w <word-list>`
 #### Create a Wordlist
 `crunch <min-length> <max-length> <characters> -o <file-name> -t <pattern>`
+### Information Gathering
+After authenticating to a network you gather information about it.
+* Find your internal IP
+  * `ifconfig wlan0`
+* Using Netdiscover
+  * `netdiscover -i wlan0 -r <network internal IP>.1/24`
+* Using Autoscan
+  * download [Autoscan](http://autoscan-network.com/download)
+  * add 32bit compatibility `dpkg --add-architecture i386`
+  * `apt-get update`
+  * download and install library `apt-get install libc6:i386`
+  * install Autoscan in the terminal running `./<downaloaded file>`
+  * run Autoscan
+* Using Nmap
+  * `zenmap`
+  * in Target put `<network internal IP>.1/24`
+  * play arround with Profile
