@@ -1,4 +1,4 @@
-# Learn Ethical Hacking From Scratch with Zaid Sabih
+# Ethical Hacking Course
 Here are the commands that will be used in the course
 # Network
 ## Change MAC Address
@@ -88,3 +88,4 @@ After authenticating to a network you gather information about it.
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
 
 This way you can see all the post request made by the target client
+To bypass HTTPS request use SSLstrip to downgrade HTTPS to an HTTP request
