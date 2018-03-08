@@ -76,6 +76,7 @@ After authenticating to a network you gather information about it.
 * in Target put `<network internal IP>.1/24`
 * play arround with Profile
 ## Man In The Middle (MITM) Atacks
+These atacks only work with HTTP sites without HSTS
 ### ARP Poisoning Using arpspoof
 * Tell the target client that I am the router
   * `arpsoof -i wlan0 -t <target client IP> <router IP>`
