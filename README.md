@@ -57,6 +57,8 @@ Here are the commands that will be used in the course
   * `aireplay-ng --arpreplay -b <network bssid> -h <your bssid || MAC> wlan0mon`
 ## Crack WPA/WPA2
 ### With WPS
+* If wash is not working
+  * `mkdir /etc/reaver`
 * Check if the network has WPS
   * `wash -i wlan0mon`
 * Attack
