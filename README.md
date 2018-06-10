@@ -1,5 +1,11 @@
 # Ethical Hacking Course
 Here are the commands that will be used in the course
+
+[Fluxion](https://github.com/FluxionNetwork/fluxion)
+
+[Airgeddon](https://github.com/v1s1t0r1sh3r3/airgeddon)
+
+`apt-get install firmware-atheros`
 # Network
 ## Change MAC Address
 * Get the interface down
