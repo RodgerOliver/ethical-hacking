@@ -12,6 +12,7 @@ Here are the commands that will be used in the course
   * `ifconfig wlan0 down`
 * Use macchanger
   * `macchanger --random wlan0`
+  * `ifconfig wlan0 hw ether 00:11:22:33:44:55`
 * Get the interface up
   * `ifconfig wlan0 up`
 ## Change Wireless Card Mode
@@ -24,7 +25,7 @@ Here are the commands that will be used in the course
 * Get the interface down
   * `ifconfig wlan0 down`
 * Change Mode
-  * `ifconfig wlan0 mode monitor`
+  * `iwconfig wlan0 mode monitor`
 * Get the interface up
   * `ifconfig wlan0 up`
 ### Method 3
@@ -37,6 +38,7 @@ Here are the commands that will be used in the course
 * Restart Network Manager
   * `service NetworkManager restart`
 ## Packet Sniffing
+[Airodump-ng](https://www.aircrack-ng.org/doku.php?id=airodump-ng)
 * Start Sniffing
   * `airodump-ng wlan0mon`
 * Sniff In A Specific Network
@@ -45,7 +47,7 @@ Here are the commands that will be used in the course
   * `aireplay-ng --deauth <num-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
 * Creatting a fake access point
   * You need to have internet connection and a wireless card to broadcast it.
-  * `apt-get install mana-toolkit`
+  * `apt install mana-toolkit`
   * Edit the files bellow
   * `leafpad /etc/mana-toolkit/hostpad-mana.conf`
   * `leafpad /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
