@@ -204,3 +204,6 @@ To download it [click here](http://www.rapid7.com/products/nexpose/compare-downl
 * Got to a browser and navigate to `https://localhost:3780`
 
 Log in and put the activation key.
+
+After the setup go to home, create, site, add a name, the IP in assets and a group, 
+save & scan. Play with the tabs.
