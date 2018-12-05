@@ -171,17 +171,36 @@ Payloads are small pieces of code that will be executed on the target computer o
 * Run the current task
   * `exploit`
 ### Metasploit Community (MSFC)
-Metasploit community is a GUI that can discover open ports and installed services on the target machine, not only that but it maps these services to metasploit modules and exploits and allow us to run these modules from the web GUI.
+Metasploit community is a GUI that can discover open ports and installed 
+services on the target machine, not only that but it maps these services 
+to metasploit modules and exploits and allow us to run these modules 
+from the web GUI
 
 To download it [click here](https://www.rapid7.com/products/metasploit/metasploit-community-registration.jsp)
 
-* Start metasploi community
+* Start metasploit community
   * `systemctl start metasploit`
 * Open the program
-  * Got to a browser and navigate to `https://localhost:3790`
+* Got to a browser and navigate to `https://localhost:3790`
 
 Log in and put the activation key.
 
 After the setup go to project, create a new project, scan the target and launch it. Then go on analysis, hosts, click on the IP, and play with the tabs.
 
 ### Nexpose
+Nexpose is a vulnerability management framework, it allows us to 
+discover, assess and act on discovered vulnerabilities, it also tells us a lot 
+of info about the discovered vulnerabilities, weather they are exploitable 
+and helps us write a report at the end of the assessment.
+
+To download it [click here](http://www.rapid7.com/products/nexpose/compare-downloads.jsp)
+
+* Stop postgresql
+  * `systemctl stop postgresql`
+* Got to the program directory
+  * `cd /opt/rapid7/nexpose`
+* Start the program
+  * `./nsc/nsc.sh`
+* Got to a browser and navigate to `https://localhost:3780`
+
+Log in and put the activation key.
