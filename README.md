@@ -139,3 +139,5 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+# Gaining Access
+## Server Side Attacks
