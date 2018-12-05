@@ -143,3 +143,45 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
 Use Wireshark to sniff the traffic of a network card. If tou are the MITM you can sniff the trafic of the target computet too.
 # Gaining Access
 ## Server Side Attacks
+Don't require user interaction. All is needed is the target IP.
+If you can ping the IP, go and hack it.
+### Information Gathering
+Scan the IP with Zenmap.
+### Metasploit
+Metasploit is an exploit development and execution tool.
+
+It can also be used to carry out other penetration testing tasks such as port scans, service identification and post exploitation tasks.
+
+Payloads are small pieces of code that will be executed on the target computer ounce the vunerability has been exploited.
+
+**Bind** payloads: open a port on the target computer and the attacker connects to that port.
+
+**Reverse** payloads: open a port on the attacker computer and the target connects to that port. This allows to bypass firewalls.
+
+* Run metasploit console
+  * `msfconsole`
+* Shows help
+  * `help`
+* Show exploits, payloads, auxiliaries or options
+  * `show [option]`
+* Use a certain exploit, payload or auxiliary
+  * `use [option]`
+* Configure [option] to have a value of [value]
+  * `set [option] [value]`
+* Run the current task
+  * `exploit`
+### Metasploit Community (MSFC)
+Metasploit community is a GUI that can discover open ports and installed services on the target machine, not only that but it maps these services to metasploit modules and exploits and allow us to run these modules from the web GUI.
+
+To download it [click here](https://www.rapid7.com/products/metasploit/metasploit-community-registration.jsp)
+
+* Start metasploi community
+  * `systemctl start metasploit`
+* Open the program
+  * Got to a browser and navigate to `https://localhost:3790`
+
+Log in and put the activation key.
+
+After the setup go to project, create a new project, scan the target and launch it. Then go on analysis, hosts, click on the IP, and play with the tabs.
+
+### Nexpose
