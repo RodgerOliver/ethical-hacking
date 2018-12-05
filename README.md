@@ -139,5 +139,7 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+### Wireshark
+Use Wireshark to sniff the traffic of a network card. If tou are the MITM you can sniff the trafic of the target computet too.
 # Gaining Access
 ## Server Side Attacks
