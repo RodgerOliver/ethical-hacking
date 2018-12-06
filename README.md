@@ -283,6 +283,6 @@ We need to be in the middle of the connection.
   * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
 
 ### Maltego - Social Engineering
-Maltego is an ingormation gathering tool that can be used to collect information about anything.
+Maltego is an information gathering tool that can be used to collect information about anything.
 The target can be a website, company, person, and do on. You can discover entities 
 associated with the taget and everything will be displayed on a nice graph.
