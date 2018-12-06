@@ -282,6 +282,27 @@ We need to be in the middle of the connection.
 * Start listening for connections
   * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
 
+#### Deliver the backdoor by any file type
+The target will recive a file with a 
+backdoor, when this file is opened the 
+backdoor will be executed in the 
+background.
+
+This will be done with a download and 
+execute script which will download the 
+file and the backdoor.
+
+In the script, change `url1` with the 
+real file url and the `url2` with the 
+backdoor url.
+
+Then the script needs to be compiled 
+with Autoit, software and programming 
+language that the script was written. 
+Change the script extension to `.au3`. 
+Select the source, destination and icon 
+for the backdoored file and convert it.
+
 ### Maltego - Social Engineering
 Maltego is an information gathering tool that can be used to collect information about anything.
 The target can be a website, company, person, and do on. You can discover entities 
