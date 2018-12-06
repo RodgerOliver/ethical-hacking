@@ -283,7 +283,7 @@ We need to be in the middle of the connection.
   * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
 
 #### Deliver the backdoor by any file type
-The target will recive a file with a 
+The target will receive a file with a 
 backdoor, when this file is opened the 
 backdoor will be executed in the 
 background.
@@ -298,7 +298,7 @@ backdoor url.
 
 Then the script needs to be compiled 
 with Autoit, software and programming 
-language that the script was written. 
+language that the script was written in. 
 Change the script extension to `.au3`. 
 Select the source, destination and icon 
 for the backdoored file and convert it.
