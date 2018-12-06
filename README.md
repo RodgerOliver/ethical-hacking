@@ -281,3 +281,8 @@ We need to be in the middle of the connection.
 * Become the MITM
 * Start listening for connections
   * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
+
+### Maltego - Social Engineering
+Maltego is an ingormation gathering tool that can be used to collect information about anything.
+The target can be a website, company, person, and do on. You can discover entities 
+associated with the taget and everything will be displayed on a nice graph.
