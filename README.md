@@ -303,6 +303,16 @@ Change the script extension to `.au3`.
 Select the source, destination and icon 
 for the backdoored file and convert it.
 
+#### Spoof File Extensions
+To spoof file extensions use the 
+Right-to-Left Override character. This 
+way you can make a `.exe` file looks like 
+a `.jpg` file.
+
+Beacause some browser are removing this 
+character you can compress the file to 
+keep the spoofed extension.
+
 ### Maltego - Social Engineering
 Maltego is an information gathering tool that can be used to collect information about anything.
 The target can be a website, company, person, and do on. You can discover entities 
