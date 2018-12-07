@@ -240,15 +240,18 @@ A backdoor is a file that gives full access over the machine that it gets execut
   * `generate`
 
 Check if your backdoor is being detected by anti-virus by going to
-[No Distribute](https://nodistribute.com/) and upload yout file.
+[No Distribute](https://nodistribute.com/) and upload your file.
 
-#### Listen for incomming connections
+### Listen for incomming connections
+
 * Listen with metasploit
   * `msfconsole`
   * `use exploit/multi/handler`
   * `show options`
   * Set the correct the correct payload, Lhost and Lport, and then exploit.
-#### Deliver the backdoor by a fake update
+
+### Deliver the backdoor by a fake update
+
 Fake an update for an already installed program.
 
 Install backdoor instead of the update.
@@ -267,7 +270,8 @@ Requires DNS spoofing + Evilgrade (a server to serve the update).
   * `start`
 * Start dns spoofing and handler by setting any updates requests to evilgrade (your IP).
 
-#### Deliver the backdoor by backdooring downloads on the fly
+### Deliver the backdoor by backdooring downloads on the fly
+
 Backdoor any .exe file that the target downloads using the Backdoor Factory Proxy (bdfproxy).
 
 We need to be in the middle of the connection.
@@ -282,7 +286,13 @@ We need to be in the middle of the connection.
 * Start listening for connections
   * `msfconsole -r /usr/share/bdfproxy/bdf_proxy_msf_resource.rc`
 
-#### Deliver the backdoor by any file type
+### Maltego - Social Engineering
+Maltego is an information gathering tool that can be used to collect information about anything.
+The target can be a website, company, person, and do on. You can discover entities 
+associated with the taget and everything will be displayed on a nice graph.
+
+### Inject the backdoor in any file
+
 The target will receive a file with a 
 backdoor, when this file is opened the 
 backdoor will be executed in the 
@@ -303,7 +313,8 @@ Change the script extension to `.au3`.
 Select the source, destination and icon 
 for the backdoored file and convert it.
 
-#### Spoof File Extensions
+### Spoof File Extensions
+
 To spoof file extensions use the 
 Right-to-Left Override character. This 
 way you can make a `.exe` file looks like 
@@ -313,7 +324,8 @@ Beacause some browser are removing this
 character you can compress the file to 
 keep the spoofed extension.
 
-#### Spoof Emails
+### Spoof Emails
+
 Email spoofing is the ability to email 
 someone with a any email address.
 
@@ -339,8 +351,3 @@ and the header.
 -xp [password] -f [from email] -t [to 
 email] -u [subject] -m [message] -o 
 message-header="From: [name] <email>"`
-
-### Maltego - Social Engineering
-Maltego is an information gathering tool that can be used to collect information about anything.
-The target can be a website, company, person, and do on. You can discover entities 
-associated with the taget and everything will be displayed on a nice graph.
