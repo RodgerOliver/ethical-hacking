@@ -372,8 +372,16 @@ have full control over the computer, everything can be done.
   * `upload [file]`
 * Execute file
   * `execute [file]`
+*List processes
+  * `ps`
 
-#### Maintaining Access
+### Migrate Process
+
+When you hack into a it is a good idea to migrate the original process to a safer one like the `explorer` which is the graphical interface of Windows.
+
+`migrate [PID]`
+
+### Maintaining Access
 
 * Method 1 - Using Veil
   * Instead of using `rev_http_service` module use `reverse_tcp_service` module.
