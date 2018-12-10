@@ -414,3 +414,28 @@ To do this a route needs to be set up between the attacker and the target. Then 
 * `set SUBNET [target subnet]`
 * `set SESSION [session id]`
 * `exploit`
+
+## Website Hacking
+
+A Website is a server that whne accessed retrieves a web page.
+
+To hack into a website you can use a server attack if the server has any vulnerability,
+a client attack in the admin of the website or a web application attack.
+
+### Information Gathering
+
+**Informations to be collected** 
+* IP Addess
+* Domain name info
+* Technologies used
+* Other websites on the same server
+* DNS records
+* Sub-domains and unlisted files and directories
+
+**Other tools to gather information**
+
+(Whois Lookup)[ http://whois.domaintools.com/] to find info about the owner of the target.
+
+(Netcraft Site Report)[http://toolbar.netcraft.com/site_report?ur] to show technologies used on the target.
+
+(Robtex DNS lookup)[https://www.robtex.com] to show comprehensive info about the target website.
