@@ -417,6 +417,8 @@ To do this a route needs to be set up between the attacker and the target. Then 
 
 ## Website Hacking
 
+[Website Request](https://link.medium.com/jDR6sAyvxS)
+
 A Website is a server that whne accessed retrieves a web page.
 
 When your browser requests a web site, the URL is translated to an IP address by a DNS server, then the IP is sent back to your computer and then the computer will connect with the server and the server will give back a response for the computer.
