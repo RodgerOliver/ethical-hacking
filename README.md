@@ -400,3 +400,14 @@ When you hack into a it is a good idea to migrate the original process to a safe
   * `set EXE::Custom [payload path]`
   * `exploit`
   * Now you just have to listen for incomming connections and a session will be opened.
+ 
+### Pivoting
+
+Pivoting is the ability to use the infected machine to hack into other machines in its network.
+
+To do this a route needs to be set up between the attacker and the target. Then the attacker will be able to attack the machines on the network.
+
+* `use post/windows/manage/autoroute`
+* `set SUBNET [target subnet]`
+* `set SESSION [session id]`
+* `exploit`
