@@ -292,7 +292,9 @@ Maltego is an information gathering tool that can be used to collect information
 The target can be a website, company, person, and do on. You can discover entities 
 associated with the taget and everything will be displayed on a nice graph.
 
-### Inject the backdoor in any file
+### Make a Trojan
+
+A Trojan is a simple file that seems to be normal but has malicious code in it, in this case a backdoor will be injected in this file.
 
 The target will receive a file with a backdoor, when this file is opened 
 the backdoor will be executed in the background.
