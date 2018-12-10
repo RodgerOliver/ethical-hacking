@@ -424,7 +424,7 @@ a client attack in the admin of the website or a web application attack.
 
 ### Information Gathering
 
-**Informations to be collected** 
+**Information to be collected** 
 * IP Addess
 * Domain name info
 * Technologies used
@@ -434,8 +434,8 @@ a client attack in the admin of the website or a web application attack.
 
 **Other tools to gather information**
 
-(Whois Lookup)[ http://whois.domaintools.com/] to find info about the owner of the target.
+[Whois Lookup](http://whois.domaintools.com/) to find info about the owner of the target.
 
-(Netcraft Site Report)[http://toolbar.netcraft.com/site_report?ur] to show technologies used on the target.
+[Netcraft Site Report](http://toolbar.netcraft.com/site_report?ur) to show technologies used on the target.
 
-(Robtex DNS lookup)[https://www.robtex.com] to show comprehensive info about the target website.
+[Robtex DNS lookup](https://www.robtex.com) to show comprehensive info about the target website.
