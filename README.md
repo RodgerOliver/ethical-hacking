@@ -419,8 +419,14 @@ To do this a route needs to be set up between the attacker and the target. Then 
 
 A Website is a server that whne accessed retrieves a web page.
 
+When your browser requests a web site, the URL is translated to an IP address by a DNS server, then the IP is sent back to your computer and then the computer will connect with the server and the server will give back a response for the computer.
+
+There can be two types of IP addresses. When the server hosts only one website this site has a **dedicated IP**. When the server hosts various websites these sites have **shared IPs**.
+
 To hack into a website you can use a server attack if the server has any vulnerability,
 a client attack in the admin of the website or a web application attack.
+
+When a website uses a Shared Web Hosting plan, if a direct attack to the website fails you can attack the other website and after accessing the server you can go to the target website.
 
 ### Information Gathering
 
