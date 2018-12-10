@@ -419,16 +419,15 @@ To do this a route needs to be set up between the attacker and the target. Then 
 
 [Website Request](https://link.medium.com/jDR6sAyvxS)
 
-A Website is a server that whne accessed retrieves a web page.
+A Website is a server that when accessed retrieves a web page.
 
 When your browser requests a web site, the URL is translated to an IP address by a DNS server, then the IP is sent back to your computer and then the computer will connect with the server and the server will give back a response for the computer.
 
 There can be two types of IP addresses. When the server hosts only one website this site has a **dedicated IP**. When the server hosts various websites these sites have **shared IPs**.
 
-To hack into a website you can use a server attack if the server has any vulnerability,
-a client attack in the admin of the website or a web application attack.
+To hack into a website you can use a server attack if the server has any vulnerability, a client attack in the admin of the website or a web application attack.
 
-When a website uses a Shared Web Hosting plan, if a direct attack to the website fails you can attack the other website and after accessing the server you can go to the target website.
+When a website uses a Shared Web Hosting plan, if a direct attack to the website fails you can attack the other websites and after accessing the server you can go to the target website.
 
 ### Information Gathering
 
@@ -447,3 +446,23 @@ When a website uses a Shared Web Hosting plan, if a direct attack to the website
 [Netcraft Site Report](http://toolbar.netcraft.com/site_report?ur) to show technologies used on the target.
 
 [Robtex DNS lookup](https://www.robtex.com) to show comprehensive info about the target website.
+
+### Subdomains
+
+Subdomain is a domain that is part of a larger domain. At `mail.google.com` , `mail` is the subdomain of `google.com`. Note that these are not shown in search engines. The root subdomain is `www`.
+
+These subdomains can contain vulnerabilities that will allow to hack the website.
+
+To find subdomains on the target use Knock.
+
+* `git clone https://github.com/guelfoweb/knock.git`
+* `cd knock/knockpy`
+* `python knock.py [target website]`
+
+### Find Files
+
+To find files and directories on a webserver use Dirb with a wordlist to brute force file and directory names that may be on the website.
+
+* `dirb [target website]`
+
+After that, analyze the files and look for something useful like `robots.txt` that tells search engines how to deal with the website, it usually contains hidden files.
