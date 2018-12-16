@@ -532,31 +532,47 @@ SQL is the programming language for relational databases. A database is where da
 
 #### Discovering SQL Injections (POST Method)
 
-The most commun places to find SQL vulnerabilities are input fields, because the input passed there is execute on the server.
+The most common places to find SQL vulnerabilities are input fields because the input passed there is execute on the server.
 
 In a login form, for example, if there is a vulnerability in the code, you can login in the page, but you can execute SQL commands as well.
 
+This a what a query looks like to login to retrieve information about the user that wants to login.
+
 `SELECT * FROM accounts WHERE username='$username_input' AND password='$passwd_input'`
 
-To check if the website has this vulnerability try some inputs in the password fiel like so.
+To check if the website has this vulnerability try to put a single quote (`'`) in the inputs, 
+if you get an error this website is vulnerable.
+
+After that test, if the website executes queries. Type this in the password field to check.
 
 `123456' AND 1=1#`. If this is the right password and you managed to login there is a SQL vulnerability.
 
 `123456' AND 1=2#`. If this is the right password and you didn't login there is a SQL vulnerability as well.
 
-The `#` sign was used to comment everything after it, so the statement will run `1=1`.
+You can use this pattern in any input field. Type something acceptable, type `'`, put a query and a comment sign (`#`)
 
-In this case, if you want to login without knowing he password, in the password field you could type: `anything' OR 1=1#`. This way if any of the statements are true it's gonna login, the password is wrong so it's false but `1=1` is true so you will be logged in.
+The `#` sign was used to comment everything after it, so the statement will run `1=1` and stop.
+Other signs like `--` and `%00` work too.
 
-You can login without eben entering a password, if type this in the username field: `admin'#`.
+In this case, if you want to login without knowing the password, in the password field you could type: `anything' OR 1=1#`. This way if any of the statements are true it's gonna login, the password is wrong so it's false but `1=1` is true so you will be logged in.
+
+You can login without even entering a password if type this in the username field: `admin'#`.
 
 #### GET Method
 
 When the inputs are passed by GET Method they are sent in the URL like so: `https://page.com/login.php?username=hello&password=world`
 
-So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are goin to be passed to the server and run in a SQL query, so you can inject code in these variables too.
+So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are going to be passed to the server and run a SQL query, so you can inject code in these variables too.
 
 It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encode Decode to encode the signs that you pass to the URL.
 
-You can inject the `ORDER BY [clause]` SQL command as well to order the table by column-number or column-name (clause) like so:
-`https://page.com/login.php?username=hello' ORDER BY 1#&password=world`
+`%20 = (space)`
+
+`%23 = (#)`
+
+You can inject the `ORDER BY [clause]` SQL command as well to order the table by column-number or column-name (clause), 
+this way you will know how much columns that table has. Inject it like so:
+
+`https://page.com/login.php?username=hello'ORDER BY 1%23&password=world`
+
+Go and sort the numbers till you get the highest number possible without an error. This number will be the number of columns in the table.
