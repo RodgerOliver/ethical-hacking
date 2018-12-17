@@ -655,3 +655,61 @@ Type `sqlmap --help` to see options and use these options to attack the server.
   * `sqlmap -u "[target url]" --columns -T [table name] -D [database name]`
 * Get data of the columns
   * `sqlmap -u "[target url]" --dump -T [table name] -D [database name]`
+
+### Cross Site Scripting (XSS)
+
+XSS is a type of vulnerability that 
+allows an attacker to inject JavaScript 
+code into a page. This code will not be 
+execute on the server, because JavaScript 
+is a client-side language, so the server 
+will be the deliver agent of the code.
+
+There are 3 main categories of XSS 
+vulnerabilities, stored, reflected and 
+DOM based.
+
+#### Persistent/Stored
+
+In this type of XSS the script is stored 
+on the server, it can be on the page or 
+on the database. So whenever a client 
+access that page the code will run.
+
+This can be exploited by looking for a 
+place where you can write something on 
+the database like a comment box, sign up 
+and sign in forms.
+
+Write the script on those inputs and they 
+will be stored in the database. Once the 
+page loads the DB, the code will be 
+executed.
+
+#### Reflected
+
+In this type, the the code will be 
+executed when the target user runs a spefic URL 
+created by the attacker.
+
+To search this vulnerability look for 
+URLs with parameters and try to inject 
+the script into these parameters in 
+various forms, encoding the characters 
+and using HTML entities.
+
+`https://page.com/search?name='Bob'`
+
+`https://page.com/search?name='<script>alert("Bob 
+is here")</script>'`
+
+#### DOM Based
+
+With his type of vulnerability the code 
+is executed on the client with no need to 
+send it to the server.
+
+### Zed Attack Proxy (ZAP)
+
+ZAP is a tool that search for 
+vulnerabilities in web application.
