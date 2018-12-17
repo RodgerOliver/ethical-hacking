@@ -567,7 +567,9 @@ When the inputs are passed by GET Method they are sent in the URL like so: `http
 
 So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are going to be passed to the server and run a SQL query, so you can inject code on them too.
 
-It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encode Decode to encode the signs that you pass to the URL.
+It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encoder Decoder to encode the signs that you pass to the URL.
+
+You can also try to encode the code with HTML Entity Encoder Decoder.
 
 `%20 = (space)`
 
