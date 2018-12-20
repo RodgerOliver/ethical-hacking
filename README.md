@@ -7,7 +7,31 @@ Here are the commands that will be used in the course
 
 `apt-get install firmware-atheros`
 # Network
-## Change MAC Address
+A network is a group of devices that can 
+communicate with each other. Generally 
+these devices are computer, celphones and 
+printers. They can transfer data between 
+them and access the internet through the 
+router. The router, or access point (AP) 
+is the only device on the network that 
+can access the web, and it is the only 
+one visible outside of the network. To 
+communicate with the devices the 
+information is sent as packets. In the 
+network, devices ensure that the packet 
+is been sent to the right destination by 
+adding the source and the destination 
+MAC.
+## MAC Address
+MAC Address stands for Media Access 
+Control and is an unique and permanent 
+number assigned by the manufacturer for each 
+network interface. It specifies 
+the brand and the model of the device. 
+Because it is a unique number it can be 
+traced. To to be anonymous it is a good 
+idea to change the MAC.
+
 * Get the interface down
   * `ifconfig wlan0 down`
 * Use macchanger
@@ -15,7 +39,13 @@ Here are the commands that will be used in the course
   * `ifconfig wlan0 hw ether 00:11:22:33:44:55`
 * Get the interface up
   * `ifconfig wlan0 up`
-## Change Wireless Card Mode
+## Wireless Card Mode
+By deafult each device on the network 
+only recieves packets that has its MAC as 
+the destination MAC. This is the Managed 
+mode. But you can see and capture all 
+packets that are been sent by changing 
+this mode to Monitor.
 ### Method 1
 * Start Monitor Mode
   * `airmon-ng start wlan0`
@@ -35,10 +65,21 @@ Here are the commands that will be used in the course
   * `airmon-ng check kill`
 * Start Monitor Mode
   * `airmon-ng start wlan0`
+* Get the interface up
+  * `ifconfig wlan0 up`
 * Restart Network Manager
   * `service NetworkManager restart`
 ## Packet Sniffing
 [Airodump-ng](https://www.aircrack-ng.org/doku.php?id=airodump-ng)
+
+After changing the mode of the wireless 
+adapter to Monitor, you are able to 
+capture all packets sent arround you.
+
+Now you can see all the APs and clients 
+arround you, their channel and MAC 
+addresses.
+
 * Start Sniffing
   * `airodump-ng wlan0mon`
 * Sniff In A Specific Network
@@ -46,6 +87,20 @@ Here are the commands that will be used in the course
 * Deauth Attacks
   * `aireplay-ng --deauth <num-of-packets> -a <network bssid> -c <target bssid> wlan0mon`
 ## Crack WEP
+WEP stands for Wired Equivalent Privacy 
+and is an old encryption method that 
+uses RC4 algorithm to encrypt the 
+packets. In this encryption method the 
+packet is encrypted with the key by the 
+sender, and the reciver decrypts it. Each 
+packet sent has a unique keystream. 
+Random initialization vector (IV) added 
+to the WEP key is used to create this 
+keystream. Then this keystream is used to 
+encrypt the packet. This IV is sent in 
+plain text with the packet for the 
+receiver to decrypt it, and it is only 
+24-bits long.
 ### Busy Network
 * Start airodump-ng in the target network
 * Crack
