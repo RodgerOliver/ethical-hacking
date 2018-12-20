@@ -10,12 +10,17 @@ Here are the commands that will be used in the course
 
 # Network
 
-A network is a group of devices that can communicate with each other. Generally, these devices are computers, cellphones, and printers. They can transfer data between them and access the internet through the router. The router or access point (AP) is the only device on the network that can access the web, and it is the only one visible outside of the network. To communicate with the devices the information is sent as packets. In the network, devices ensure that the packet is been sent to the right destination by adding the source and the destination MAC.
+A network is a group of devices that can communicate with each other. Generally, these devices are computers, cellphones, and printers. They can transfer data between them and access the internet through the router.
+
+The router or access point (AP) is the only device on the network that can access the web, and it is the only one visible outside of the network. To communicate with the devices the information is sent as packets.
+
+In the network, devices ensure that the packet is been sent to the right destination by adding the source and the destination MAC.
 
 ## MAC Address
 
-MAC Address stands for Media Access Control and is a unique and permanent number assigned by the manufacturer for each
-network interface. It specifies the brand and the model of the device. Because it is a unique number it can be traced. To to be anonymous it is a good idea to change the MAC.
+MAC Address stands for Media Access Control and is a unique and permanent number assigned by the manufacturer for each network interface. It specifies the brand and the model of the device.
+
+Because it is a unique number it can be traced. To to be anonymous it is a good idea to change the MAC.
 
 * Get the interface down
   * `ifconfig wlan0 down`
@@ -27,7 +32,9 @@ network interface. It specifies the brand and the model of the device. Because i
   
 ## Wireless Card Mode
 
-By default, each device on the network only receives packets that have its MAC as the destination MAC. This is the Managed mode. But you can see and capture all packets that are been sent by changing this mode to Monitor.
+By default, each device on the network only receives packets that have its MAC as the destination MAC.
+
+This is the Managed mode. But you can see and capture all packets that are been sent by changing this mode to Monitor.
 
 ### Method 1
 
@@ -75,7 +82,11 @@ Now you can see all the APs and clients around you, their channel and MAC addres
 
 ## Crack WEP
 
-WEP stands for Wired Equivalent Privacy and is an old encryption method that uses the RC4 algorithm to encrypt the packets. In this encryption method, the packet is encrypted with the key by the sender, and the receiver decrypts it. Each packet sent has a unique keystream. A random initialization vector (IV) is added to the WEP key is used to create this keystream. Then this keystream is used to encrypt the packet. This IV is sent in plain text with the packet for the receiver to decrypt it, and it is only 24-bits long.
+WEP stands for Wired Equivalent Privacy and is an old encryption method that uses the RC4 algorithm to encrypt the packets. In this encryption method, the packet is encrypted with the key by the sender, and the receiver decrypts it.
+
+Each packet sent has a unique keystream. A random initialization vector (IV) is added to the WEP key is used to create this keystream. Then this keystream is used to encrypt the packet.
+
+This IV is sent in plain text with the packet for the receiver to decrypt it, and it is only 24-bits long.
 
 ### Busy Network
 
