@@ -104,7 +104,34 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ## Crack WPA/WPA2
 
+The successor of WEP is WPA, that stands 
+for Wi-Fi Protected Access, and is much 
+more secure than the other one.
+
+WPA also uses the RC4 algorithm to 
+encrypt the packets, but it uses TKIP 
+(Temporal Key Integrity Protocol) to 
+generate the keystreams. The IV 
+of this method is larger and encrypted. 
+This way each packet has its own key that 
+is encrypted.
+
+WPA2 on the other hand uses the AES 
+algorithm in combination with CCMP to 
+ensure packet integrity.
+
 ### With WPS
+
+WPS (Wi-Fi Protected Setup) is a method 
+of authenticating with the router without 
+entering the key. When the WPS button on 
+the router and on the device that wants 
+to connect to the network are pressed, a 
+8-bit pin is shared from the router to 
+the device, and then it can connect.
+
+A brute force attack cam be used to get 
+this pin and then get the WPA key.
 
 * If wash is not working
   * `mkdir /etc/reaver`
@@ -117,6 +144,24 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ### Without WPS
 
+If the WPS is disabled or is configured 
+to use push buttom authentication (PBC), 
+then you will have to crack the WPA key.
+
+Beacause the keystream is temporary we 
+can't use it to crack the password. The 
+only packets that contain useful 
+information are the handshake packets.
+
+Handshakes are four packets that are 
+transfered between the client and the 
+router when the client connects to the 
+network.
+
+To crack it you need to capture these 
+packets and crack the key using a 
+wordlist.
+
 * Start airodump-ng in the target
 * Deauth a client to capture the WPA Hanshake
 * Crack the Key
@@ -128,7 +173,11 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ## Information Gathering
 
-After authenticating to a network you gather information about it.
+After authenticating to a network you 
+gather information about it. Discover 
+which clients are connected, wich ports 
+are opened and what are the services 
+running on that port.
 
 ### Using Netdiscover
 
@@ -151,9 +200,38 @@ After authenticating to a network you gather information about it.
 
 ## Man In The Middle (MITM) Atacks
 
-These atacks only work with HTTP sites without HSTS
+A MITM attack is simply someone in the 
+middle of your connection with a client 
+or a router. When packets are sent 
+between these devices the MITM can 
+capture all of them and read its content.
+
+With all the attacks that intercept data 
+from a client to a server, if it uses 
+HTTPS you can't see the information 
+because it is encrypted.
 
 ### ARP Poisoning Using arpspoof
+
+One method to become the MITM is to use 
+ARP spoofing.
+
+ARP stand for Address Resolution Protocol 
+and it links the IPs of the 
+clients on the network with their MACs.
+
+The client sends a ARP request in ths 
+network looking for a certaind IP. The 
+client which has that IP send an ARP 
+response which contains his MAC address.
+
+Each computer has an ARP table containing 
+IPs and MACs. But an ARP response can be 
+sent without the need of its request. 
+Therefore, the attacker can tell the 
+target client that he is the router and 
+tell the router that he is the target 
+client, becoming the MITM.
 
 * Tell the target client that I am the router
   * `arpsoof -i wlan0 -t <target client IP> <router IP>`
