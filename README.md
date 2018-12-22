@@ -197,7 +197,7 @@ After authenticating to a network you gather information about it. Discover whic
 
 A MITM attack is simply someone in the middle of your connection with a client or a router. When packets are sent between these devices the MITM can capture all of them and read its content.
 
-With all the attacks that intercept data from a client to a server, if it uses HTTPS you can't see the information because it is encrypted.
+With all the attacks that intercept data from a client to a server, if it uses HTTPS you can't see the information because it is encrypted. And websites that have HSTS (HTTP Strict Transport Security) can't be downgraded to HTTP
 
 ### ARP Poisoning Using arpspoof
 
@@ -262,9 +262,23 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   
 ### Fake Access Point (Honeypot) to become the MITM
 
-* You need to have internet connection and a wireless card to broadcast it.
+If you are the router, or the AP, all the traffic goes through you, so you are the MITM and you can perform attacks on the clients.
+
+#### Aircrack-ng
+
+[Click here](https://github.com/RodgerOliver/ethical-hacking/blob/master/fake-ap-commands.txt) to see the commands to manually creta a fake AP using the Aircrack-ng suite.
+
+#### Mana-Toolkit
+
+This tool automatically creates an Access Point, it just needs to be configured.
+
+It has 3 main scripts, **start-noupstream** which starts an AP with no internet connection, **start-nat-simple** which start an AP with internet and **start-nat-full** which start an AP with internet and also starts sslstrip, sslsplit, firelamp and attempts to bypass HSTS.
+
+For this to work, you need a wireless adapter to broadcast the signal and a interface connected to the internet.
+
+* Install Mana-Toolkit
   * `apt install mana-toolkit`
-* Edit the files below. Change the interface and the ssid. Then, change the upstream and the phy.
+* Edit the files below. Change the interface and the ssid. Then, change the upstream (internet) and the phy (broadcaster).
   * `nano /etc/mana-toolkit/hostpad-mana.conf`
   * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
