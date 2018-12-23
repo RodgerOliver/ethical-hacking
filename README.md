@@ -165,12 +165,25 @@ Because the keystream is temporary we can't use it to crack the password. The on
 
 Handshakes are four packets that are transferred between the client and the router when the client connects to the network.
 
-To crack it you need to capture these packets and crack the key using a wordlist.
+To crack it you need to capture the handshake and a wordlist with all the possible passwords.
+
+The Aircrack-ng tool combines each password in the wordlist with the AP name (ESSID) to compute a PMK (Pairwise Master Key) using the pbkdf2 algorithm. Then the PMK is compared to the one that is on the handshake file, if they match the cracking is done.
 
 * Start airodump-ng in the target
 * Deauth a client to capture the WPA Handshake
 * Crack the Key
   * `aircrack-ng <handshake-file> -w <word-list>`
+
+To automate this process you can convert the wordlist to a PMK list and, once you have the handshake, compare it with the one that is in the packet.
+
+* Create a database and import the wordlist
+  * `airolib-ng <db-name> --import passwd <wordlist>`
+* Import target ESSID
+  * `airolib-ng <db-name> --import essid <target ESSID>`
+* Compute PMK from the wordlist
+  * `airolib-ng <db-name> --batch`
+*  Crack the key using the PMKs
+  * `aircrack-ng -r <db-name> <handshake-file>`
 
 ### Create a Wordlist
 
