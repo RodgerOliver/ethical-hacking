@@ -94,9 +94,11 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 * Crack
   * `aircrack-ng <network-file>`
 
-### NOT Busy Network
+### NOT Busy Network (Packet Injection)
 
-#### Method 1
+#### ARP Request Reply Attack
+
+In this method, the attacker waits for an ARP packet, after capture it, he will inject it into the traffic, forcing the AP to generate a new ARP packet with a new IV. This process will be repeated until the number of captured IVs is enough to crack the WEP key.
 
 * Sniff the packets on the target network
 * Associate with the target network (tell the network that I want to connect to it)
@@ -106,7 +108,9 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 * Crack the key
   * `aircrack-ng <.cap file>`
 
-#### Method 2
+#### Korek Chopchop Attack
+
+With this method the attacker will capture an ARP packet and try to guess its keystream, then this will be used to forge a new packet that will be injected into the traffic to generate new IVs.
 
 * Sniff the packets on the target network
 * Associate with the target network
@@ -117,7 +121,9 @@ This IV is sent in plain text with the packet for the receiver to decrypt it, an
 * Inject fake packets
   * `aireplay-ng --arpreplay -r <forged packets file name> wlan0mon`
 
-#### Method 3
+#### Fragmentation Attack
+
+In this method, the attacker will obtain 1500 bytes of the PRGA (Pseudo Random Generation Algorithm) that generates the keystreams. Then a keystream will be generated and will be used to forge packets that will be injected into the traffic.
 
 * Sniff the packets on the target network
 * Associate with the target network
